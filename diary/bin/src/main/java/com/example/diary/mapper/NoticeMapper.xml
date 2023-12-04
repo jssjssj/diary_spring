@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.mapper.NoticeMapper">
+	<select id="selectNoticeList" parameterType="java.util.Map"
+			resultType="com.example.diary.vo.Notice">
+		SELECT 
+				notice_no noticeNo , 
+				createdate , 
+				notice_title noticeTitle
+		FROM notice
+		ORDER BY notice_no desc
+		LIMIT #{beginRow} , #{rowPerPage}
+	</select>
+	
+	<select id="selectNoticeOne"
+			parameterType="com.example.diary.vo.Notice"
+			resultType="com.example.diary.vo.Notice">
+		SELECT 
+				member_id memberId ,
+				notice_no noticeNo , 
+				notice_title noticeTitle , 
+				notice_content noticeContent , 
+				createdate
+		FROM notice
+		WHERE notice_no = #{noticeNo}
+	</select>
+	
+	<!-- 공지페이지 페이징버튼 설계위한 전체 공지 수 출력 -->
+	<select id="noticeCount"
+			parameterType="com.example.diary.vo.Notice">
+		SELECT 
+				count(notice_no)
+		FROM notice
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.example.diary.vo.Notice">
+		INSERT INTO notice(
+			member_id , 
+			notice_title , 
+			notice_content , 
+			notice_pw
+		) VALUES (
+			#{memberId},
+			#{noticeTitle},
+			#{noticeContent},
+			PASSWORD(#{noticePw})
+		)
+	</insert>
+	
+	<delete id="deleteNotice" parameterType="com.example.diary.vo.Notice">
+		DELETE FROM notice
+		WHERE notice_no = #{noticeNo}
+		AND notice_pw = PASSWORD(#{noticePw})
+	</delete>
+	
+	<update id="updateNotice" parameterType="com.example.diary.vo.Notice">
+		UPDATE notice SET
+		notice_title = #{noticeTitle} ,
+		notice_content = #{noticeContent}
+		WHERE notice_no = #{noticeNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
