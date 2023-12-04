@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.mapper.ScheduleMapper">
+	<select id="selectScheduleListByMonth" parameterType="java.util.Map"
+				resultType="java.util.Map">
+		SELECT 
+				day(SCHEDULE_date) AS day, 
+				COUNT(*) AS cnt, 
+				GROUP_CONCAT(substr(SCHEDULE_memo,1,5)) AS memo
+				FROM SCHEDULE
+				WHERE member_id = #{memberId}
+				AND YEAR(schedule_date) = #{targetYear}
+				AND MONTH(schedule_date) = #{targetMonth} +1
+				GROUP BY SCHEDULE_date
+				ORDER BY SCHEDULE_date ASC
+	</select>
+</mapper>
+
+
