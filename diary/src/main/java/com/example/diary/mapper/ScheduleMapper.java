@@ -9,4 +9,6 @@ import com.example.diary.vo.Schedule;
 @Mapper
 public interface ScheduleMapper {
 	List<Map<String,Object>> selectScheduleListByMonth(Map<String, Object> paramMap);
+	
+	List<Schedule> selectScheduleList(Map<String, Object> paramMap);
 }

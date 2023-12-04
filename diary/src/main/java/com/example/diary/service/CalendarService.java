@@ -42,14 +42,14 @@ public class CalendarService {
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("targetYear", targetYear);
-		resultMap.put("targetMonth", targetMonth);
-		session.setAttribute("targetYear", targetYear);
-		session.setAttribute("targetMonth", targetMonth);
-		
+		resultMap.put("targetMonth", targetMonth);		
 		resultMap.put("lastDate", lastDate);
 		resultMap.put("beginBlank", beginBlank);
 		resultMap.put("endBlank", endBlank);
 		resultMap.put("totalTd", totalTd);
+		
+		session.setAttribute("targetYear", targetYear);
+		session.setAttribute("targetMonth", targetMonth);	// 달력 내 각 일자별 스케줄표기 위해 월 , 일자 정보 전달
 		
 		System.out.println(resultMap + "<-- resultMap");
 		

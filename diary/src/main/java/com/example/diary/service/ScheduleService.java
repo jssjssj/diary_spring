@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.diary.mapper.ScheduleMapper;
+import com.example.diary.vo.Schedule;
 
 @Service
 @Transactional
@@ -21,4 +22,11 @@ public class ScheduleService {
 		scheduleList = scheduleMapper.selectScheduleListByMonth(paramMap);
 		return scheduleList;
 	}
+	
+	public List<Schedule> scheduleList (Map<String, Object> paramMap) {		
+		List<Schedule> scheduleListByDay = new ArrayList<>();
+		scheduleListByDay = scheduleMapper.selectScheduleList(paramMap);
+		return scheduleListByDay;
+	}
+	
 }

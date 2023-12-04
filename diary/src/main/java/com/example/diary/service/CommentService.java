@@ -19,15 +19,15 @@ public class CommentService {
 	public List<Comment> selectCommentList(Map<String, Object> paramMap){
 		List<Comment> commentList = commentMapper.selectCommentList(paramMap);
 		return commentList;
-	}
-	
-	public int insertComment(Comment comment) {
-		int row = commentMapper.insertComment(comment);
+	}	
+	public int commentCount() {
+		int row = commentMapper.commentCount();
 		return row;
 	}
 	
-	public int commentCount() {
-		int row = commentMapper.commentCount();
+	
+	public int insertComment(Comment comment) {
+		int row = commentMapper.insertComment(comment);
 		return row;
 	}
 	

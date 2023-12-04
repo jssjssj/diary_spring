@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <h1> 공지상세 </h1>
-						<form method="post" action=""></form>
+						
 	<table border="1">
 	
 		<tr>
@@ -35,7 +36,17 @@
 		</tr>
 			
 	</table>
-	<br><br><br><br><br><br>
+	<br><br><br>
+	
+	<form method="post" action="${contextPath}/addComment" class="addCommentAct">
+	<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
+		댓글내용<input type="text" name="commentContent" class="commentContent">	<input type="checkbox" name="secret" value="N" class="isSecret">비밀글<br>
+		댓글PW<input type="password" name="commentPw" class="commentPw"> <br>
+		작성자<input type="text" name="memberId" value="${loginMember.memberId}" readonly>
+		<button type="submit" class="addCommentBtn">등록</button>
+	</form>
+	
+	<br>
 	
 		<table border="1">
 		
@@ -67,7 +78,30 @@
 		<a href="${contextPath}/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}"><button type="button">다음</button></a>
 		<a href="${contextPath}/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}"><button type="button">맨뒤</button></a>
 			</c:if>
-		 
+	 |	 
 			
 </body>
+<script>
+
+/* $('.addCommentBtn').click(function() {
+	if($('.commentContent').val().length<1){
+		alert('내용을 입력하세요');
+		return;
+	} else if($('.commentPw').val().length<1){
+		alert('댓글PW를 입력하세요');
+		return;
+	} else {
+			$('.addCommentAct').submit();
+		}		
+	}); */
+	
+	
+	
+	
+	$('.addCommentBtn').change(function{
+		$('.isSecret').val() == 'Y';
+	});
+	
+	
+</script>
 </html>
