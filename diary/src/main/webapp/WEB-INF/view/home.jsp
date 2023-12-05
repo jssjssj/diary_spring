@@ -47,7 +47,7 @@
 						<a href="${contextPath}/scheduleOneByDay?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">${d}</a>
 					<c:forEach var="s" items="${scheduleList}">
 						<c:if test="${d == s.day}">
-						${s.cnt}
+						${s.cnt}개 일정
 						${s.memo}						
 						</c:if>						
 					</c:forEach>

@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="selectScheduleListByMonth" parameterType="java.util.Map"
-				resultType="com.example.diary.vo.schedule">
+				resultType="com.example.diary.vo.Schedule">
 		SELECT 
 				schedule_no AS scheduleNo , 
 				member_id AS memberId , 

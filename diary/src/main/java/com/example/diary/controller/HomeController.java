@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.diary.service.CalendarService;
 import com.example.diary.service.ScheduleService;
 import com.example.diary.vo.Member;
-import com.example.diary.vo.Schedule;
 
 import jakarta.servlet.http.HttpSession;
 

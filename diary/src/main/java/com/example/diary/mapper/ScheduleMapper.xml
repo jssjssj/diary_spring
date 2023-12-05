@@ -15,24 +15,50 @@
 		ORDER BY SCHEDULE_date ASC
 	</select>
 	
-	<select id="selectScheduleListByMonth" parameterType="java.util.Map"
-				resultType="com.example.diary.vo.schedule">
+	<select id="selectScheduleOneByDay" parameterType="java.util.Map"
+				resultType="com.example.diary.vo.Schedule">
 		SELECT 
 				schedule_no AS scheduleNo , 
 				member_id AS memberId , 
 				schedule_date AS scheduleDate ,
-				schedule_emoji scheduleEmoji , 
-				schedule_memo scheduleMemo ,
-				createdate				
-				
-	FROM      schedule    
+				schedule_emoji AS scheduleEmoji , 
+				schedule_memo AS scheduleMemo ,
+				createdate
+	FROM schedule    
 	WHERE member_id = #{memberId}
 	AND YEAR(schedule_date) = #{targetYear}
-	AND MONTH(schedule_date) = #{targetMonth} +1
-	AND DAY(schedule_date) = ' #{targetDay};
-	
-	
+	AND MONTH(schedule_date) = #{targetMonth} +2
+	AND DAY(schedule_date) = #{targetDay}
+	ORDER BY schedule_no DESC
 	</select>
+	
+	<insert id="insertSchedule" parameterType="com.example.diary.vo.Schedule">
+	
+		INSERT INTO schedule(
+				member_id ,
+				schedule_date ,
+				schedule_emoji , 
+				schedule_memo
+		) VALUES (
+				#{memberId} ,
+				#{scheduleDate} ,
+				#{scheduleEmoji} ,
+				#{scheduleMemo} 				
+		)
+	</insert>	
+	
+	<delete id="deleteSchedule" parameterType="com.example.diary.vo.Schedule">
+		DELETE FROM schedule
+		WHERE schedule_no = #{scheduleNo}	
+	</delete>
+	
+	<update id="updateSchedule" parameterType="com.example.diary.vo.Schedule">
+		UPDATE schedule SET
+			schedule_emoji = #{scheduleEmoji} ,
+			schedule_memo = #{scheduleMemo}
+			
+		WHERE schedule_no = #{scheduleNo}	
+	</update>
 </mapper>
 
 

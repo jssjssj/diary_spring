@@ -34,7 +34,7 @@ public class ScheduleController {
 		paramMap.put("targetMonth", targetMonth);
 		paramMap.put("targetDay", targetDay);
 		
-		List<Schedule> scheduleList = scheduleService.scheduleList(paramMap);
+		List<Schedule> scheduleList = scheduleService.selectScheduleOneByDay(paramMap);
 		
 		model.addAttribute("loginMember" , loginMember);
 		model.addAttribute("targetYear" , targetYear);
@@ -46,9 +46,49 @@ public class ScheduleController {
 		return "schedule/scheduleOneByDay";
 	}
 	
-	@PostMapping
-	public String addScheduleByDay() {
+	@PostMapping("/addSchedule")
+	public String addScheduleByDay(Schedule schedule , HttpSession session , Integer targetYear, Integer targetMonth,
+									Integer targetDay , Model model) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		System.out.println(schedule.getScheduleDate());					// 날짜값 확인 - 디버깅
 		
+		
+		schedule.setMemberId(loginMember.getMemberId());
+		int row = scheduleService.insertSchedule(schedule);
+		
+		
+		model.addAttribute("targetYear" , targetYear);
+		model.addAttribute("targetMonth" , targetMonth);
+		model.addAttribute("targetDay" , targetDay);
+		model.addAttribute("loginMember" , loginMember);
+		
+		if(row>0) {			
+			String u = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
+			return u;
+		} else {
+			return "schedule/scheduleOneByDay";
+		}
+		
+	}
+	
+	@GetMapping("/removeSchedule")
+	public String removeScheduleByDay(Schedule schedule , Integer targetYear, Integer targetMonth,
+			Integer targetDay) {
+		System.out.println(schedule.getScheduleNo());
+		int row = scheduleService.deleteSchedule(schedule);
+	if(row>0) {		
+		String u = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
+		return u;
+	} else {
 		return "schedule/scheduleOneByDay";
+	}
+}
+	
+	@PostMapping("/modifySchedule")
+	public String modifyScheduleByDay(Schedule schedule) {
+		scheduleService.updateSchedule(schedule);
+		
+		return "redirect:/scheduleOneByDay";
+		
 	}
 }

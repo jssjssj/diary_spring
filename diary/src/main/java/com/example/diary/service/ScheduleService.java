@@ -14,7 +14,8 @@ import com.example.diary.vo.Schedule;
 @Service
 @Transactional
 public class ScheduleService {
-	@Autowired private ScheduleMapper scheduleMapper;
+	@Autowired 
+	 ScheduleMapper scheduleMapper;
 	
 	public List<Map<String,Object>> getScheduleListByMonth(Map<String, Object> paramMap) {		
 		List<Map<String,Object>> scheduleList = new ArrayList<>();
@@ -23,10 +24,25 @@ public class ScheduleService {
 		return scheduleList;
 	}
 	
-	public List<Schedule> scheduleList (Map<String, Object> paramMap) {		
-		List<Schedule> scheduleListByDay = new ArrayList<>();
-		scheduleListByDay = scheduleMapper.selectScheduleList(paramMap);
-		return scheduleListByDay;
+	public List<Schedule> selectScheduleOneByDay (Map<String, Object> paramMap) {		
+		List<Schedule> selectScheduleOneByDay = new ArrayList<>();
+		selectScheduleOneByDay = scheduleMapper.selectScheduleOneByDay(paramMap);
+		return selectScheduleOneByDay;
+	}
+	
+	public int insertSchedule(Schedule schedule) {
+		int row = scheduleMapper.insertSchedule(schedule);
+		return row;
+	}
+	
+	public int deleteSchedule(Schedule schedule) {
+		int row = scheduleMapper.deleteSchedule(schedule);
+		return row;
+	}
+	
+	public int updateSchedule(Schedule schedule) {
+		int row = scheduleMapper.updateSchedule(schedule);
+		return row;
 	}
 	
 }
