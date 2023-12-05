@@ -61,17 +61,44 @@
 			
 		<c:forEach var="c" items="${commentList}">
 			<tr>
-				<td>${c.memberId}</td>			
-				<td>${c.commentContent}</td>
-			 		<c:if test="${loginMember.memberLevel == 1}"> <!-- 관리자용 즉시삭제 -->
-				<td><a href="${contextPath}/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}"><button type="button">삭제</button></a></td>
-					</c:if>	
-					
-					<c:if test="${loginMember.memberLevel != 1 && loginMember.memberId == c.memberId}"> <!--회원용 삭제페이지 이동 -->
-				<td><a href="${contextPath}/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}"><button type="button">삭제</button></a></td>
-					</c:if>		 
+				<td>${c.memberId}</td>
+				<c:if test="${c.isSecret=='N'}">
+					<td>${c.commentContent}</td>
+				</c:if>
+
+				<c:if test="${!(c.isSecret=='N')}">
+
+
+					<c:if
+						test="${loginMember.memberLevel == 1 || c.memberId==loginMember.memberId}">
+						<td>${c.commentContent}</td>
+					</c:if>
+
+
+					<c:if
+						test="${!(loginMember.memberLevel == 1 || c.memberId==loginMember.memberId)}">
+						<td>비밀댓글입니다 : 관리자만 확인가능</td>
+					</c:if>
+
+				</c:if>
+
+				<c:if test="${loginMember.memberLevel == 1}">
+					<!-- 관리자용 즉시삭제 -->
+					<td><a
+						href="${contextPath}/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}"><button
+								type="button">삭제</button></a></td>
+				</c:if>
+
+				<c:if
+					test="${loginMember.memberLevel != 1 && loginMember.memberId == c.memberId}">
+					<!--회원용 삭제페이지 이동 -->
+					<td><a
+						href="${contextPath}/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}"><button
+								type="button">삭제</button></a></td>
+				</c:if>
 			</tr>
 		</c:forEach>
+		
 		</table>	
 		
 			<c:if test="${currentPage!=1}">
