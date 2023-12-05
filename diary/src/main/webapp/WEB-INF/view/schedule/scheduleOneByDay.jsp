@@ -11,9 +11,9 @@
 <body>
 
 
-<h2>${loginMember.memberId}님의 ${targetYear}-${targetMonth+2}-${targetDay} 일정</h2>
 
-<form action="${contextPath}/modifySchedule" class="modifyScheduleAct" method="post">	
+
+					<h2>${loginMember.memberId}님의 ${targetYear}-${targetMonth+2}-${targetDay} 일정</h2>
 	<table border="1">
 		<tr>
 			<!-- <td>스케쥴 임티</td>  <-- 추후 예정 !  --> 
@@ -27,24 +27,24 @@
 		 <!-- <td><input type="text" name="scheduleEmoji" value="${s.scheduleEmoji}" class="scheduleEmoji"> </td> -->
 			<td>
 						<input type="hidden" name="scheduleNo" value="${s.scheduleNo}"> 
-						<input type="text" name="scheduleMemo" value="${s.scheduleMemo}" class="scheduleMemo0"> 
+						<input type="text" name="scheduleMemo" value="${s.scheduleMemo}" readonly> 
 			</td>
 			<td>${s.createdate}</td>
 			<td colspan="2">
-						<button type="button" class="modifyScheduleBtn">수정</button>
+						<a href="${contextPath}/modifySchedule?scheduleNo=${s.scheduleNo}&scheduleMemo=${s.scheduleMemo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"><button type="button">수정</button></a>
 						<a href="${contextPath}/removeSchedule?scheduleNo=${s.scheduleNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"><button type="button">삭제</button></a>
 			</td>
 		</tr>
 				</c:forEach>
 	</table>
-</form>
+	
 
 
 <form method="post" class="addScheduleAct" action="${contextPath}/addSchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}">
 <input type="hidden" name="scheduleDate" value="${targetYear}-${targetMonth+2}-${targetDay}">
 
 	스케쥴 추가<br>
-	<textarea rows="" cols="" name="scheduleMemo" class="scheduleMemo"></textarea>
+	<textarea rows="10" cols="50" name="scheduleMemo" class="scheduleMemo"></textarea>
 	
 			<button type="button" class="addScheduleBtn">등록</button>
 </form>
@@ -56,17 +56,11 @@
 			return;
 		} else {
 			$('.addScheduleAct').submit();
-		}
-	});
-	
-	$('.modifyScheduleBtn').click(function() {
-		if($('.scheduleMemo0').val().length < 1){
-			alert('메모를 입력하세요');
-			return;
-		} else {
-			$('.modifyScheduleAct').submit();
 	}
-	});
+});
+	
+
+	
 	
 
 </script>

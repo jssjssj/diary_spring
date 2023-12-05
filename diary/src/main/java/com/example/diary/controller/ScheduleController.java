@@ -14,6 +14,7 @@ import com.example.diary.service.ScheduleService;
 import com.example.diary.vo.Member;
 import com.example.diary.vo.Schedule;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -54,41 +55,47 @@ public class ScheduleController {
 		
 		
 		schedule.setMemberId(loginMember.getMemberId());
-		int row = scheduleService.insertSchedule(schedule);
-		
-		
-		model.addAttribute("targetYear" , targetYear);
-		model.addAttribute("targetMonth" , targetMonth);
-		model.addAttribute("targetDay" , targetDay);
-		model.addAttribute("loginMember" , loginMember);
-		
-		if(row>0) {			
-			String u = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
-			return u;
-		} else {
-			return "schedule/scheduleOneByDay";
-		}
-		
+		scheduleService.insertSchedule(schedule);		
+	
+		String link = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
+		return link;	
 	}
 	
 	@GetMapping("/removeSchedule")
 	public String removeScheduleByDay(Schedule schedule , Integer targetYear, Integer targetMonth,
-			Integer targetDay) {
-		System.out.println(schedule.getScheduleNo());
-		int row = scheduleService.deleteSchedule(schedule);
-	if(row>0) {		
-		String u = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
-		return u;
-	} else {
-		return "schedule/scheduleOneByDay";
+										Integer targetDay) {
+		scheduleService.deleteSchedule(schedule);
+		
+		String link = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
+		return link;	
 	}
-}
+	
+	
+	@GetMapping("/modifySchedule")
+	public String modifyScheduleByDay(Schedule schedule , HttpSession session , Integer targetYear, Integer targetMonth,
+										Integer targetDay , Model model) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember==null) {
+			return "login";
+		}
+		model.addAttribute("targetYear", targetYear);
+		model.addAttribute("targetMonth", targetMonth);
+		model.addAttribute("targetDay" ,targetDay);
+		model.addAttribute("schedule", schedule);
+		
+		return "schedule/modifySchedule";
+	}
 	
 	@PostMapping("/modifySchedule")
-	public String modifyScheduleByDay(Schedule schedule) {
+	public String modifyScheduleByDay(Schedule schedule, Integer targetYear, Integer targetMonth,
+										Integer targetDay) {
+		System.out.println(schedule + " <-- 스케쥴 메모 toString()");
 		scheduleService.updateSchedule(schedule);
 		
-		return "redirect:/scheduleOneByDay";
+		String link = "redirect:/scheduleOneByDay?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDay="+targetDay;
+		return link;
 		
 	}
+	
+	
 }

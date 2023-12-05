@@ -20,31 +20,52 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@GetMapping("/commentList")
-	public String selectCommentList(Model model,
-									@RequestParam(defaultValue = "1") int currentPage) {
-		
-		  return "notice/noticeOne";
-		 
-	}
+//	@GetMapping("/commentList")
+//	public String selectCommentList(Model model,
+//									@RequestParam(defaultValue = "1") int currentPage) {
+//		
+//		  return "notice/noticeOne";
+//		 
+//	}
 	
 	@PostMapping("/addComment")
-	public String addCommentList(Comment comment , String secret  , HttpSession session) {
-		
-		comment.setSecret(false);
-		if(secret=="Y") {
-			comment.setSecret(true);
-		}
-	
-		
-		System.out.println(secret + "<-- isSecret");
-		int row = commentService.insertComment(comment);
-		if(row>0) {
-			return "redirect:notice/noticeOne";
+	public String addCommentList(Comment comment, HttpSession session) {
+		if(comment.getIsSecret() == null) {
+			comment.setIsSecret("N");
 		} else {
-			return "notice/noticeOne";
+			comment.setIsSecret("Y");
 		}
 		
-		 				
+		System.out.println(comment + "<-- comment");
+		commentService.insertComment(comment);
+		String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+			return url;			 				
 	}
+	
+	@GetMapping("/removeComment_manager")
+	public String removeComment_manager(Comment comment) {
+		commentService.deleteComment_manager(comment);	
+		String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+		return url;
+	}
+	
+	@GetMapping("/removeComment")
+	public String removeComment(Comment comment , Model model) {
+		model.addAttribute(comment);
+		return "comment/removeComment";
+	}
+	
+	@PostMapping("/removeComment")
+	public String removeComment(Comment comment) {
+		int row = commentService.deleteComment(comment);
+		if(row>0) {
+			String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+			return url;
+		} else {
+			String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+			return url;
+		}
+		
+	}
+	
 }

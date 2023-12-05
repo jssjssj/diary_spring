@@ -70,7 +70,7 @@ public class NoticeController {
 		model.addAttribute("notice",paramNotice);		// noticeOne 출력 완		
 		
 		// commentList 출력세팅
-		int rowPerPage = 15;
+		int rowPerPage = 10;
 		int beginRow   = (currentPage-1)*rowPerPage;
 		Map<String, Object> commentMap = new HashMap<>();
 		

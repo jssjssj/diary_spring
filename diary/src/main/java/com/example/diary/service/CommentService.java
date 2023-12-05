@@ -31,6 +31,13 @@ public class CommentService {
 		return row;
 	}
 	
-	
+	public int deleteComment_manager(Comment comment) {
+		int row = commentMapper.deleteComment_manager(comment);
+		return row;
+	}
+	public int deleteComment(Comment comment) {
+		int row = commentMapper.deleteComment(comment);
+		return row;
+	}
 	
 }

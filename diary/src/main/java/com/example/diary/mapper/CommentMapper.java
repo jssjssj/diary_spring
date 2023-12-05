@@ -18,4 +18,9 @@ public interface CommentMapper {
 	int insertComment(Comment comment);
 	
 	
+	// 관리자 전용 즉시삭제와 comment_pw 입력 후 삭제 구분
+	int deleteComment_manager(Comment comment);
+	
+	int deleteComment(Comment comment);
+	
 }

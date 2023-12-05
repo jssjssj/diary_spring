@@ -17,11 +17,14 @@
 	</select>
 	
 	<!-- 댓글 페이징버튼 설계위한 전체 댓글 수 출력 -->
-	<select id="commentCount" parameterType="com.example.diary.vo.Comment">
+	<select id="commentCount" parameterType="com.example.diary.vo.Comment"
+								resultType="Integer">
 		SELECT 
 				count(comment_no)
 		FROM comment
 	</select>
+	
+	
 
 	<insert id="insertComment" parameterType="com.example.diary.vo.Comment">
 		INSERT INTO comment(
@@ -39,5 +42,22 @@
 		)	
 	</insert>
 	
+	<delete id="deleteComment_manager" parameterType="com.example.diary.vo.Comment">
+		DELETE FROM comment
+		WHERE comment_no = #{commentNo}	
+	</delete>
+	
+	
+	<!-- 일반회원 전용 댓글PW입력 후 삭제 위한 매핑 / PW조회 후 삭제 위해 PW이용해 댓글정보 조회 쿼리 구현 -->
+	<delete id="deleteComment" parameterType="com.example.diary.vo.Comment">
+		DELETE FROM comment
+		WHERE comment_no = #{commentNo}	
+		AND comment_pw = PASSWORD(#{commentPw})
+	</delete>
+	<!-- <select id="selectFromCommentPw" parameterType="com.example.diary.vo.Comment"
+							resultType="com.example.diary.vo.Comment">
+		SELECT 	
+							
+	</select> -->
 	
 </mapper>
