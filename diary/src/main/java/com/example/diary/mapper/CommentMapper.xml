@@ -24,7 +24,6 @@
 		FROM comment
 	</select>
 	
-	
 
 	<insert id="insertComment" parameterType="com.example.diary.vo.Comment">
 		INSERT INTO comment(

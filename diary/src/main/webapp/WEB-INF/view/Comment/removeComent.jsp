@@ -16,9 +16,9 @@
 				<input type="hidden" name="noticeNo" value="${comment.noticeNo}"></div> <!-- 삭제 후 리다이렉트위한 파라미터값 전달 -->
 				
 				
-		<div>댓글내용 : <input type="text" name="commentContent" value="${comment.commentContent}" readonly></div>
-		<div>댓글 PW : <input type="password" name="commentPw" class="commentPw"></div>
-				<button type="button" class="removeCommentBtn">삭제하기</button>
+		<div>댓글 : <input type="text" name="commentContent" value="${comment.commentContent}" readonly></div>
+		<div>댓글PW : <input type="password" name="commentPw" class="commentPw"></div>
+				<button type="button" class="removeCommentBtn">삭제</button>
 	</form>
 </body>
 	<script>

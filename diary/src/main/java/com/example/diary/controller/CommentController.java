@@ -20,13 +20,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-//	@GetMapping("/commentList")
-//	public String selectCommentList(Model model,
-//									@RequestParam(defaultValue = "1") int currentPage) {
-//		
-//		  return "notice/noticeOne";
-//		 
-//	}
+
 	
 	@PostMapping("/addComment")
 	public String addCommentList(Comment comment, HttpSession session) {

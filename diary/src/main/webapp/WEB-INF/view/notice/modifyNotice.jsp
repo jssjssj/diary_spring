@@ -36,7 +36,7 @@
 			</tr>
 				
 		</table>
-					<button type = "button" class = "modifyBtn">수정하기</button>
+					<button type = "button" class = "modifyBtn">수정</button>
 	</form>
 </body>
 <script type="text/javascript">

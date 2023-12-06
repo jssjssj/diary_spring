@@ -19,6 +19,16 @@
 	
 	<div><a href="${contextPath}/noticeList"><button type="button">공지사항</button></a></div>
 	
+	<div>
+		<form action="${contextPath}/scheduleListByWord" method="get">
+			<input type="text" name="word">
+			<button type="submit">검색</button>
+		</form>
+	</div>
+	
+	
+	
+	
 	<!-- 캘린더 -->
 	<div>
 		${calendarMap.targetYear}년

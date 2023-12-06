@@ -18,7 +18,9 @@ import com.example.diary.vo.Member;
 import com.example.diary.vo.Notice;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class NoticeController {
 	@Autowired 

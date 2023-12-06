@@ -32,33 +32,141 @@
 	ORDER BY schedule_no DESC
 	</select>
 	
-	<insert id="insertSchedule" parameterType="com.example.diary.vo.Schedule">
-	
-		INSERT INTO schedule(
-				member_id ,
-				schedule_date ,
-				schedule_emoji , 
-				schedule_memo
-		) VALUES (
-				#{memberId} ,
-				#{scheduleDate} ,
-				#{scheduleEmoji} ,
-				#{scheduleMemo} 				
-		)
-	</insert>	
-	
-	<delete id="deleteSchedule" parameterType="com.example.diary.vo.Schedule">
+	<insert id="insertSchedule"
+	parameterType="com.example.diary.vo.Schedule">
+
+	INSERT INTO schedule(
+			member_id ,
+			schedule_date ,
+			schedule_emoji ,
+			schedule_memo
+	) VALUES (
+			#{memberId} ,
+			#{scheduleDate} ,
+			#{scheduleEmoji} ,
+			#{scheduleMemo}
+	)
+</insert>
+
+	<delete id="deleteSchedule"
+		parameterType="com.example.diary.vo.Schedule">
 		DELETE FROM schedule
-		WHERE schedule_no = #{scheduleNo}	
+		WHERE schedule_no = #{scheduleNo}
 	</delete>
-	
-	<update id="updateSchedule" parameterType="com.example.diary.vo.Schedule">
+
+	<update id="updateSchedule"
+	parameterType="com.example.diary.vo.Schedule">
 		UPDATE schedule SET
-			schedule_emoji = #{scheduleEmoji} ,
-			schedule_memo = #{scheduleMemo}
-			
-		WHERE schedule_no = #{scheduleNo}	
+		schedule_emoji = #{scheduleEmoji} ,
+		schedule_memo = #{scheduleMemo}
+	
+		WHERE schedule_no = #{scheduleNo}
 	</update>
+
+
+<!-- 
+	<select id="selectScheduleListByWord" parameterType="java.util.Map"
+	resultType="com.example.diary.vo.Schedule">
+		SELECT
+		schedule_no AS scheduleNo,
+		schedule_memo AS scheduleMemo,
+		schedule_date AS scheduleDate
+		FROM schedule
+		<where>
+			<if test="word != ''">
+				schedule_memo LIKE CONCAT('%' , #{word} , '%')
+			</if>
+		</where>
+		AND member_id = #{memberId}
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	schedule 검색기능 및 페이징 위한 전체 count 조회
+	<select id="selectCountSchedule" parameterType="com.example.diary.vo.Schedule"
+	resultType="Integer">
+		SELECT COUNT(schedule_no)
+		FROM schedule
+	</select>
+ -->
+
+
+<select id="selectScheduleListByDate"
+	parameterType="java.util.Map"
+	resultType="com.example.diary.vo.Schedule">
+	SELECT
+	schedule_no AS scheduleNo,
+	schedule_date AS scheduleDate,
+	schedule_memo AS scheduleMemo
+	FROM schedule
+	<where>
+		<choose>
+			<when test="year != null and month == null and day == null">
+				AND YEAR(schedule_date) = #{year}
+
+			</when>
+			<when test="year != null and month != null and day == null">
+				AND YEAR(schedule_date) = #{year}
+				AND MONTH(schedule_date) = #{month}
+
+			</when>
+			<when test="year != null and month != null and day != null">
+				AND YEAR(schedule_date) = #{year}
+				AND MONTH(schedule_date) = #{month}
+				AND DAY(schedule_date) = #{day}
+			</when>
+		</choose>
+	</where>
+	<if test="year == null and month == null and day == null">
+	WHERE member_id = #{memberId}
+	</if>
+	<if test="(year != null and month == null and day == null)or(year != null and month != null and day == null)or(year != null and month != null and day != null)">
+	AND member_id = #{memberId}
+	</if>
+	LIMIT #{beginRow}, #{rowPerPage}
+</select>
+
+
+<select id="selectCountScheduleListByDate"
+	parameterType="java.util.Map" resultType="Integer">
+	SELECT
+	count(*) AS cnt
+	FROM schedule
+	
+	<where>
+		<choose>
+			<when test="year != null and month == null and day == null">
+				AND YEAR(schedule_date) = #{year}
+			</when>
+			<when test="year != null and month != null and day == null">
+				AND YEAR(schedule_date) = #{year}
+				AND MONTH(schedule_date) = #{month}
+			</when>
+			<when test="year != null and month != null and day != null">
+				AND YEAR(schedule_date) = #{year}
+				AND MONTH(schedule_date) = #{month}
+				AND DAY(schedule_date) = #{day}
+			</when>
+		</choose>
+	</where>
+	<if test="year == null and month == null and day == null">
+	WHERE member_id = #{memberId}
+	</if>
+	<if test="(year != null and month == null and day == null)or(year != null and month != null and day == null)or(year != null and month != null and day != null)">
+	AND member_id = #{memberId}
+	</if>
+</select>
+
+<select id="selectScheduleDateMaxYear" resultType="Integer">
+		SELECT MAX(YEAR(schedule_date))
+		FROM schedule
+</select>
+
+<select id="selectScheduleDateMinYear" resultType="Integer">
+		SELECT MIN(YEAR(schedule_date))
+		FROM schedule;
+</select>
+
+
+
+
 </mapper>
-
-
