@@ -64,30 +64,47 @@
 	</update>
 
 
-<!-- 
-	<select id="selectScheduleListByWord" parameterType="java.util.Map"
-	resultType="com.example.diary.vo.Schedule">
+
+	<select id="selectScheduleListByWord"
+		parameterType="java.util.Map"
+		resultType="com.example.diary.vo.Schedule">
 		SELECT
 		schedule_no AS scheduleNo,
 		schedule_memo AS scheduleMemo,
 		schedule_date AS scheduleDate
 		FROM schedule
 		<where>
-			<if test="word != ''">
+			<if test="word != null">
 				schedule_memo LIKE CONCAT('%' , #{word} , '%')
 			</if>
 		</where>
-		AND member_id = #{memberId}
+		<if test="word==null">
+			WHERE member_id = #{mmemberId}
+		</if>
+		<if test="word!=null">
+			AND member_id = #{memberId}
+		</if>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
-	
-	schedule 검색기능 및 페이징 위한 전체 count 조회
-	<select id="selectCountSchedule" parameterType="com.example.diary.vo.Schedule"
-	resultType="Integer">
-		SELECT COUNT(schedule_no)
+
+	<!-- selectScheduleListByWord 페이징 위한 전체 count 조회 -->
+	<select id="selectCountScheduleListByWord"
+		parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(*) cnt
 		FROM schedule
+		<where>
+			<if test="word != null">
+				schedule_memo LIKE CONCAT('%' , #{word} , '%')
+			</if>
+		</where>
+		<if test="word==null">
+			WHERE member_id = #{mmemberId}
+		</if>
+		<if test="word!=null">
+			AND member_id = #{memberId}
+		</if>		
 	</select>
- -->
+
 
 
 <select id="selectScheduleListByDate"
@@ -125,7 +142,7 @@
 	LIMIT #{beginRow}, #{rowPerPage}
 </select>
 
-
+<!-- selectScheduleListByDate 페이징 위한 전체 count 조회 -->
 <select id="selectCountScheduleListByDate"
 	parameterType="java.util.Map" resultType="Integer">
 	SELECT

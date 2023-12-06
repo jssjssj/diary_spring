@@ -19,14 +19,14 @@ public interface ScheduleMapper {
 	
 	
 	
-	  // 사용자에 따른 전체 리스트 출력기능 - 검색창 / 페이징 기능 구현 
+	  // 단어검색에 따른 스케줄 목록 조회 / 페이징 기능
 	List<Schedule> selectScheduleListByWord(Map<String, Object> paramMap);	 
-	int selectCountSchedule(Schedule schedule);
+	int selectCountScheduleListByWord(Map<String, Object> paramMap);
 	 
 	
 	
 	
-	// 연, 월, 일 입력에 따른 스케줄 목록 조히 / 페이징 기능
+	// 연, 월, 일 입력에 따른 스케줄 목록 조회 / 페이징 기능
 	
 
 	List<Schedule> selectScheduleListByDate(Map<String,Object> map);	

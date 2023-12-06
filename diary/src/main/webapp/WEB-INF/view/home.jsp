@@ -14,17 +14,13 @@
 	<a href="${contextPath}/logout"><button type="button">로그아웃</button></a>
 	<a href="${contextPath}/modifyMember"><button type="button">정보수정</button></a>	<br>	<br>	<br>
 	<%-- <a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}"><button type="button">회원탈퇴</button></a> --%> 
-	<!-- 회원탈퇴는 마리아DB NO ACTION 변경 오류로 쿼리 등은 만들었으나 보류 -->
+	<!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 -->
 	
 	
 	<div><a href="${contextPath}/noticeList"><button type="button">공지사항</button></a></div>
+	<a href="${contextPath}/scheduleListByDate"><button type="button">날짜로 메모찾기</button></a>
+	<a href="${contextPath}/scheduleListByWord"><button type="button">단어로 메모찾기</button></a>
 	
-	<div>
-		<form action="${contextPath}/scheduleListByWord" method="get">
-			<input type="text" name="word">
-			<button type="submit">검색</button>
-		</form>
-	</div>
 	
 	
 	

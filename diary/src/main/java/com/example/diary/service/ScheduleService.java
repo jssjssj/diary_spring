@@ -50,19 +50,72 @@ public class ScheduleService {
 	}
 	
 	
-	// 작성한 스케쥴 메모 검색기능
-	public List<Schedule> getScheduleListByWord(Map<String, Object> paramMap) {
-		List<Schedule> list = null;
-		
-			list = scheduleMapper.selectScheduleListByWord(paramMap);
-		
-		return list;
-	}
 	// 작성한 스케쥴 메모 검색기능 / 페이징 위한 전체 카운트 수 조회 메소드 
-	public int selectCountSchedule(Schedule schedule) {
-		int row = scheduleMapper.selectCountSchedule(schedule);
-		return row;
+	public Map<String,Object> getScheduleListByWord( 
+											@RequestParam(name="word", defaultValue = "") String word ,
+											@RequestParam(name="currentPage" ,defaultValue = "1") int currentPage,
+											String memberId) {		
+			Map<String, Object> paramMap = new HashMap<>();
+			paramMap.put("word", word);
+			paramMap.put("memberId", memberId);
+			int totalRow = scheduleMapper.selectCountScheduleListByWord(paramMap); // 멤버별 전체 스케줄 수 도출
+			
+			int rowPerPage = 20;
+			int beginRow = (currentPage-1)*rowPerPage;
+			int lastPage = totalRow/rowPerPage;
+			
+			if(totalRow==0) {
+				lastPage = currentPage;
+			} else {
+				if(totalRow%rowPerPage != 0) {
+					lastPage += 1;
+				}
+			}
+			
+			paramMap.put("rowPerPage", rowPerPage);
+			paramMap.put("beginRow", beginRow);	
+			
+			List<Schedule> list = new ArrayList<>();
+			list = scheduleMapper.selectScheduleListByWord(paramMap); //멤버별 스케줄 등 도출			
+		
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("lastPage", lastPage);
+			resultMap.put("currentPage", currentPage);
+			resultMap.put("list", list);
+			resultMap.put("word", word);
+		return resultMap;
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 날짜 검색에 따른 작성메모 출력기능
@@ -108,9 +161,15 @@ public class ScheduleService {
 		int totalRow = scheduleMapper.selectCountScheduleListByDate(paramMap);
 		System.out.println(totalRow + "<---- totalRow");
 		int lastPage = totalRow/rowPerPage;
-		if(totalRow % rowPerPage != 0) {
-			lastPage += 1;
+		
+		if(totalRow==0) {
+			lastPage = currentPage;
+		} else {
+			if(totalRow % rowPerPage != 0) {
+				lastPage += 1;
+			}
 		}
+		
 		
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("beginRow", beginRow);

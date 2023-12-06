@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.tags.shaded.org.apache.xpath.functions.FuncSubstring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +26,18 @@ public class ScheduleController {
 	@Autowired ScheduleService scheduleService;
 	
 	@GetMapping("/scheduleOneByDay")
-	public String scheduleByDay(Schedule schedule , HttpSession session , Integer targetYear, Integer targetMonth,
-									Integer targetDay , Model model) {
+	public String scheduleByDay(Schedule schedule, HttpSession session, String scheduleDate, 
+									Integer targetYear, Integer targetMonth,
+									Integer targetDay, Model model) {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) {
 			return "redirect:/login";
 		}
-		
+		if(scheduleDate!=null) {
+			targetYear = Integer.parseInt(scheduleDate.substring(0,4));
+			targetMonth = Integer.parseInt(scheduleDate.substring(5,7))-2;
+			targetDay = Integer.parseInt(scheduleDate.substring(8,10));
+		}
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("memberId", loginMember.getMemberId());
 		paramMap.put("targetYear", targetYear);
@@ -99,27 +105,37 @@ public class ScheduleController {
 		return url;		
 	}
 	
-//	@GetMapping("/scheduleListByWord")
-//	public String scheduleListByWord(@RequestParam(name="word", defaultValue="") String word , Map<String, Object> paramMap, Model model , 
-//			@RequestParam(name="currentPage", defaultValue="1") int currentPage) {
-//		int rowPerPage = 20;
-//		int beginRow = (currentPage-1)*rowPerPage;
-//		int totalRow = scheduleService.selectCountSchedule();
-//		int lastPage = totalRow / rowPerPage ;
-//		if(totalRow%rowPerPage != 0) {
-//			lastPage += 1;
-//		}
-//				
-//		
-//		
-//		paramMap = new HashMap<>();
-//		paramMap.put("word", word);
-//		paramMap.put("word", word);
-//		paramMap.put("word", word);
-//		List<Schedule> list = scheduleService.getScheduleListByWord(paramMap);
-//		model.addAttribute("list" , list);
-//		return "schedule/scheduleListByWord";
-//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/scheduleListByWord")
+	public String scheduleListByWord(@RequestParam(name="word", defaultValue="") String word ,
+										HttpSession session,
+										String scheduleDate,
+										Model model , 
+										@RequestParam(name="currentPage", defaultValue="1") int currentPage) {
+		
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember==null) {
+			return "member/login";
+		}
+		
+		Map<String, Object> resultMap = scheduleService.getScheduleListByWord(word , currentPage , loginMember.getMemberId());
+		model.addAttribute("resultMap" , resultMap);
+		model.addAttribute("loginMember" , loginMember);
+		
+		return "schedule/scheduleListByWord";
+	}
+	
+	
 	
 	@GetMapping("/scheduleListByDate")
 	public String scheduleListByDate(

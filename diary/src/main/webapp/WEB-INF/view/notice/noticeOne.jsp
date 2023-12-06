@@ -80,7 +80,7 @@
 
 					<c:if
 						test="${!(loginMember.memberLevel == 1 || c.memberId==loginMember.memberId)}">
-						<td>비밀댓글입니다 : 관리자만 확인가능</td>
+						<td>비밀글 : 관리자만 확인가능</td>
 					</c:if>
 
 				</c:if>
