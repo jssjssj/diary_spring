@@ -9,15 +9,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<form action="${contextPath}/removeMember" method="post" class="removeMemberAct">
+	<form action="${contextPath}/removeMember" method="post"
+		class="removeMemberAct">
 		<div>탈퇴를 위해 PW를 입력하세요</div>
-		<div><input type="password" name="memberPw" class="memberPw"></div>
-			<button type="button" class="removeMemberBtn">탈퇴하기</button>
+		<div>
+			<input type="password" name="memberPw" class="memberPw">
+		</div>
+		<button type="button" class="removeMemberBtn">탈퇴하기</button>
 	</form>
 </body>
-<script type="text/javascript">
+<script>
 	$('.removeMemberBtn').click(function() {
-		if($('.memberPw').val().length<1){
+		if ($('.memberPw').val().length < 1) {
 			alert('PW를 입력하세요');
 			return;
 		} else {

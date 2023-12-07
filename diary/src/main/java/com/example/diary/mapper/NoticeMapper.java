@@ -9,22 +9,18 @@ import com.example.diary.vo.Notice;
 
 @Mapper
 public interface NoticeMapper {
-	
-	// 목록(페이징)
-	List<Notice> selectNoticeList(Map<String, Object> paramMap);	
-	
-	//페이징 위한 전체 수량
-	int noticeCount();		
-	
-	// 상세보기
-	Notice selectNoticeOne(Notice notice);		
-	
-	// 입력
+	// insert / select / update / delete
+
+	List<Notice> selectNoticeList(Map<String, Object> paramMap);
+
+	Notice selectNoticeOne(Notice notice);
+
 	int insertNotice(Notice notice);
-	
-	// 삭제
+
 	int deleteNotice(Notice notice);
-	
-	// 수정
+
 	int updateNotice(Notice notice);
-}	
+
+	// 페이징 위한 전체 수량
+	int noticeCount();
+}

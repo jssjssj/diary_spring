@@ -20,46 +20,44 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-
-	
 	@PostMapping("/addComment")
 	public String addCommentList(Comment comment, HttpSession session) {
-		if(comment.getIsSecret() == null) {
+		if (comment.getIsSecret() == null) {
 			comment.setIsSecret("N");
 		} else {
 			comment.setIsSecret("Y");
 		}
-		
+
 		System.out.println(comment + "<-- comment");
 		commentService.insertComment(comment);
-		String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
-			return url;			 				
+		String url = "redirect:/noticeOne?noticeNo=" + comment.getNoticeNo();
+		return url;
 	}
 	
 	@GetMapping("/removeComment_manager")
-	public String removeComment_manager(Comment comment) {
-		commentService.deleteComment_manager(comment);	
-		String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+	public String removeComment_manager(Comment comment, HttpSession session) {
+		commentService.deleteComment_manager(comment);
+		String url = "redirect:/noticeOne?noticeNo=" + comment.getNoticeNo();
 		return url;
 	}
 	
 	@GetMapping("/removeComment")
-	public String removeComment(Comment comment , Model model) {
+	public String removeComment(Comment comment, Model model) {
 		model.addAttribute(comment);
 		return "comment/removeComment";
 	}
-	
+
 	@PostMapping("/removeComment")
 	public String removeComment(Comment comment) {
 		int row = commentService.deleteComment(comment);
-		if(row>0) {
-			String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+		if (row > 0) {
+			String url = "redirect:/noticeOne?noticeNo=" + comment.getNoticeNo();
 			return url;
 		} else {
-			String url = "redirect:/noticeOne?noticeNo="+comment.getNoticeNo();
+			String url = "redirect:/noticeOne?noticeNo=" + comment.getNoticeNo();
 			return url;
 		}
-		
+
 	}
 	
 }

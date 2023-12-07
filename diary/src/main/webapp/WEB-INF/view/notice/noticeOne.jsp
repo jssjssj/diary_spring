@@ -9,37 +9,35 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<h1> 공지상세 </h1>
-						
-	<table border="1">
+	<h1>공지상세</h1>
+		<table border="1">
+			<tr>
+				<td>공지번호</td>
+				<td>${notice.noticeNo}</td>
+			</tr>
 	
-		<tr>
-			<td>공지번호</td>				
-			<td>${notice.noticeNo}</td>
-		</tr>
-			
-		<tr>
-			<td>제목</td>		
-			<td>${notice.noticeTitle}</td>				
-		</tr>
-		
-		
-		<tr>
-			<td>내용</td>			
-			<td>${notice.noticeContent}</td>
-		</tr>
-		
-		
-		<tr>
-			<td>작성일</td>		
-			<td>${notice.createdate}</td>
-		</tr>
-			
-	</table>
+			<tr>
+				<td>제목</td>
+				<td>${notice.noticeTitle}</td>
+			</tr>
+	
+	
+			<tr>
+				<td>내용</td>
+				<td>${notice.noticeContent}</td>
+			</tr>
+	
+	
+			<tr>
+				<td>작성일</td>
+				<td>${notice.createdate}</td>
+			</tr>
+		</table>
 	<br><br><br>
 	
 	<span class="addCommentMsg"></span>
-	<form method="post" action="${contextPath}/addComment" id="addCommentAct">
+	<form method="post" action="${contextPath}/addComment"
+		id="addCommentAct">
 		<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
 		댓글내용<input type="text" name="commentContent" id="commentContent">
 		<input type="checkbox" name="isSecret" id="isSecret">비밀글<br>
@@ -104,23 +102,19 @@
 
 	</table>
 
-	<c:if test="${currentPage!=1}">
-		<a href="${contextPath}/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}"><button type="button">맨앞</button></a>
-		<a href="${contextPath}/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}"><button type="button">이전</button></a>
+		<!-- 페이징 버튼 -->
+			<c:if test="${currentPage!=1}">
+				<a href="${contextPath}/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}"><button type="button">맨앞</button></a>
+				<a href="${contextPath}/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}"><button type="button">이전</button></a>
 			</c:if>
 			
 			<c:if test="${currentPage!=lastPage}">
-		<a href="${contextPath}/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}"><button type="button">다음</button></a>
-		<a href="${contextPath}/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}"><button type="button">맨뒤</button></a>
+				<a href="${contextPath}/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}"><button type="button">다음</button></a>
+				<a href="${contextPath}/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}"><button type="button">맨뒤</button></a>
 			</c:if>
-	  
 			
 </body>
 <script>
-
-
-
-
 	$('#addCommentBtn').click(function() {
 		if($('#commentContent').val().length<1){
 			alert('내용을 입력하세요');
@@ -148,7 +142,6 @@
  });
  ) else {
 	 $('.isSecret').val('N');
- }
-  
+ }  
 </script>
 </html>
