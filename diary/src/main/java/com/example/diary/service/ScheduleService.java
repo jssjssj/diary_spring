@@ -60,7 +60,7 @@ public class ScheduleService {
 			paramMap.put("memberId", memberId);
 			int totalRow = scheduleMapper.selectCountScheduleListByWord(paramMap); // 멤버별 전체 스케줄 수 도출
 			
-			int rowPerPage = 20;
+			int rowPerPage = 10;
 			int beginRow = (currentPage-1)*rowPerPage;
 			int lastPage = totalRow/rowPerPage;
 			
@@ -122,8 +122,8 @@ public class ScheduleService {
 	public Map<String, Object> getScheduleListByDate(String year, String month, String day,
 			@RequestParam(defaultValue = "1") int currentPage , String memberId) {
 		//월 범위
-		Integer minYear = scheduleMapper.selectScheduleDateMinYear();
-		Integer maxYear = scheduleMapper.selectScheduleDateMaxYear();
+		Integer minYear = scheduleMapper.selectScheduleDateMinYear(memberId);
+		Integer maxYear = scheduleMapper.selectScheduleDateMaxYear(memberId);
 		Map<String, Integer> maxMinMap = new HashMap<>();
 		maxMinMap.put("minYear", minYear);
 		maxMinMap.put("maxYear", maxYear);
@@ -154,10 +154,10 @@ public class ScheduleService {
 		
 		
 		// 페이징 구현
-		int rowPerPage = 20;
+		int rowPerPage = 10;
 		int beginRow = (currentPage-1)*rowPerPage;
 
-		System.out.println(paramMap + "<-- totalRow 도출 전 paramMap값");
+		System.out.println(paramMap + "<-- totalRow 도출 전 paramMap");
 		int totalRow = scheduleMapper.selectCountScheduleListByDate(paramMap);
 		System.out.println(totalRow + "<---- totalRow");
 		int lastPage = totalRow/rowPerPage;
@@ -173,13 +173,14 @@ public class ScheduleService {
 		
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("beginRow", beginRow);
-		System.out.println(paramMap + "<-- 최종 paramMap값");
+		System.out.println(paramMap + "<-- final paramMap");
 		List<Schedule> list = scheduleMapper.selectScheduleListByDate(paramMap);
 		
 		//반환 맵
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("maxMinMap", maxMinMap);
 		resultMap.put("list", list);
+		resultMap.put("list.size()", list.size());
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("currentPage", currentPage);
 		

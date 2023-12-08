@@ -36,9 +36,9 @@ public interface ScheduleMapper {
 
 	List<Schedule> selectScheduleListByDate(Map<String, Object> map);
 
-	Integer selectScheduleDateMaxYear();
+	Integer selectScheduleDateMaxYear(String memberId);
 
-	Integer selectScheduleDateMinYear();
+	Integer selectScheduleDateMinYear(String memberId);
 
 	int selectCountScheduleListByDate(Map<String, Object> map);
 	

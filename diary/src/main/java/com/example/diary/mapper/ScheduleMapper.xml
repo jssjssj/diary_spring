@@ -6,7 +6,7 @@
 			SELECT 
 				day(SCHEDULE_date) AS day, 
 				COUNT(*) AS cnt, 
-				GROUP_CONCAT(substr(SCHEDULE_memo,1,5)) AS memo
+				GROUP_CONCAT(substr(SCHEDULE_memo,1,3),'..') AS memo
 		FROM SCHEDULE
 		WHERE member_id = #{memberId}
 		AND YEAR(schedule_date) = #{targetYear}
@@ -57,9 +57,8 @@
 	<update id="updateSchedule"
 	parameterType="com.example.diary.vo.Schedule">
 		UPDATE schedule SET
-		schedule_emoji = #{scheduleEmoji} ,
-		schedule_memo = #{scheduleMemo}
-	
+			schedule_emoji = #{scheduleEmoji} ,
+			schedule_memo = #{scheduleMemo}	
 		WHERE schedule_no = #{scheduleNo}
 	</update>
 
@@ -76,13 +75,11 @@
 		<where>
 			<if test="word != null">
 				schedule_memo LIKE CONCAT('%' , #{word} , '%')
+				AND member_id = #{memberId}
 			</if>
 		</where>
 		<if test="word==null">
 			WHERE member_id = #{mmemberId}
-		</if>
-		<if test="word!=null">
-			AND member_id = #{memberId}
 		</if>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
@@ -95,14 +92,12 @@
 		<where>
 			<if test="word != null">
 				schedule_memo LIKE CONCAT('%' , #{word} , '%')
+				AND member_id = #{memberId}
 			</if>
 		</where>
 		<if test="word==null">
 			WHERE member_id = #{mmemberId}
 		</if>
-		<if test="word!=null">
-			AND member_id = #{memberId}
-		</if>		
 	</select>
 
 
@@ -119,25 +114,23 @@
 		<choose>
 			<when test="year != null and month == null and day == null">
 				AND YEAR(schedule_date) = #{year}
-
+				AND member_id = #{memberId}
 			</when>
 			<when test="year != null and month != null and day == null">
 				AND YEAR(schedule_date) = #{year}
 				AND MONTH(schedule_date) = #{month}
-
+				AND member_id = #{memberId}
 			</when>
 			<when test="year != null and month != null and day != null">
 				AND YEAR(schedule_date) = #{year}
 				AND MONTH(schedule_date) = #{month}
 				AND DAY(schedule_date) = #{day}
+				AND member_id = #{memberId}
 			</when>
 		</choose>
 	</where>
 	<if test="year == null and month == null and day == null">
 	WHERE member_id = #{memberId}
-	</if>
-	<if test="(year != null and month == null and day == null)or(year != null and month != null and day == null)or(year != null and month != null and day != null)">
-	AND member_id = #{memberId}
 	</if>
 	LIMIT #{beginRow}, #{rowPerPage}
 </select>
@@ -153,37 +146,35 @@
 		<choose>
 			<when test="year != null and month == null and day == null">
 				AND YEAR(schedule_date) = #{year}
+				AND member_id = #{memberId}
 			</when>
 			<when test="year != null and month != null and day == null">
 				AND YEAR(schedule_date) = #{year}
 				AND MONTH(schedule_date) = #{month}
+				AND member_id = #{memberId}
 			</when>
 			<when test="year != null and month != null and day != null">
 				AND YEAR(schedule_date) = #{year}
 				AND MONTH(schedule_date) = #{month}
 				AND DAY(schedule_date) = #{day}
+				AND member_id = #{memberId}
 			</when>
 		</choose>
 	</where>
 	<if test="year == null and month == null and day == null">
 	WHERE member_id = #{memberId}
 	</if>
-	<if test="(year != null and month == null and day == null)or(year != null and month != null and day == null)or(year != null and month != null and day != null)">
-	AND member_id = #{memberId}
-	</if>
 </select>
 
-<select id="selectScheduleDateMaxYear" resultType="Integer">
+<select id="selectScheduleDateMaxYear" parameterType="String" resultType="Integer">
 		SELECT MAX(YEAR(schedule_date))
 		FROM schedule
+		WHERE member_id = #{memberId}
 </select>
 
-<select id="selectScheduleDateMinYear" resultType="Integer">
+<select id="selectScheduleDateMinYear" parameterType="String" resultType="Integer">
 		SELECT MIN(YEAR(schedule_date))
-		FROM schedule;
+		FROM schedule
+		WHERE member_id = #{memberId}
 </select>
-
-
-
-
 </mapper>

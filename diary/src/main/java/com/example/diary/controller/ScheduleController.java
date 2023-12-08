@@ -140,6 +140,7 @@ public class ScheduleController {
 		Map<String, Object> resultMap = scheduleService.getScheduleListByDate(year, month, day, currentPage,
 				loginMember.getMemberId());
 		model.addAttribute("resultMap", resultMap);
+		System.out.println(resultMap.get("list.size()") + "<-- resultMap.get(\"list\").size()");
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		model.addAttribute("day", day);

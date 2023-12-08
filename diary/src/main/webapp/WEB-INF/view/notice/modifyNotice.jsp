@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -12,7 +16,7 @@
 	<h1>공지수정</h1>
 	<form method="post" action="${contextPath}/modifyNotice"
 		class="modifyAct">
-		<table border="1">
+		<table>
 
 			<tr>
 				<td>공지번호</td>
@@ -29,10 +33,10 @@
 
 			<tr>
 				<td>내용</td>
-				<td><input type="text" name="noticeContent"
-					value="${paramNotice.noticeContent}" class="noticeContent"></td>
+				<td>
+					<textarea rows="10" cols="50" name="noticeContent" class="noticeContent">${paramNotice.noticeContent}</textarea>
+				</td>
 			</tr>
-
 
 			<tr>
 				<td>작성일</td>

@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -14,7 +18,7 @@
 				type="button">공지추가</button></a>
 	</c:if>
 	<a href="${contextPath}/home"><button type="button">홈으로</button></a>
-	<table border="1">
+	<table>
 		<tr>
 			<th>공지번호</th>
 			<th>제목</th>

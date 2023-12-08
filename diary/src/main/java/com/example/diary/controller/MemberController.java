@@ -38,23 +38,30 @@ public class MemberController {
 		session.setAttribute("loginMember", loginMember);
 		return "redirect:/home";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "member/login";
 	}
-	
+
 	@GetMapping("/addMember")
 	public String addMember() {
 		return "member/addMember";
 	}
-	
+
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
-		System.out.println(member + "<--member");
-		memberService.addMember(member);
+	public String addMember(Member paramMember , Model model) {
+		Member loginMember = memberService.login(paramMember);
+		if (loginMember != null) {
+			String alreadyId = "중복 아이디입니다.";
+			model.addAttribute("alreadyId", alreadyId);
+			return "member/addMember";
+		} else {
+		System.out.println(paramMember + "<--member");
+		memberService.addMember(paramMember);
 		return "member/login";
+		}
 	}
 	
 	@GetMapping("/removeMember")

@@ -4,13 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<h1>공지상세</h1>
-		<table border="1">
+		<table>
 			<tr>
 				<td>공지번호</td>
 				<td>${notice.noticeNo}</td>
@@ -19,14 +23,12 @@
 			<tr>
 				<td>제목</td>
 				<td>${notice.noticeTitle}</td>
-			</tr>
-	
+			</tr>	
 	
 			<tr>
 				<td>내용</td>
-				<td>${notice.noticeContent}</td>
-			</tr>
-	
+				<td><textarea  rows="30" cols="40" readonly="readonly">${notice.noticeContent}</textarea></td>
+			</tr>	
 	
 			<tr>
 				<td>작성일</td>
@@ -50,7 +52,7 @@
 
 	<br>
 
-	<table border="1">
+	<table>
 
 		<tr>
 			<td>작성자</td>

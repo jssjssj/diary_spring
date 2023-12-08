@@ -1,15 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<div>${loginMember.memberId}님의
+	<h4>ID : ${loginMember.memberId}</h4>
+	<div>
 		<c:if test="${(year!=null && year!='')}">
 			${year}년
 		</c:if>
@@ -19,35 +26,17 @@
 		<c:if test="${(day!=null && day!='')}">
 			${day}일
 		</c:if>
+		<c:if
+			test="${(year == null || year == '') && 
+					(month == null || month == '') && 
+					(day == null || day == '')}">
+		전체
+		</c:if>
 		일정
 	</div>
-	<!-- 페이징버튼 -->
-	<c:if test="${resultMap.currentPage != 1}">
-		<a href="${contextPath}/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}"><button type="button">맨앞</button></a>
-		<a href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage-1}&year=${year}&month=${month}&day=${day}"><button type="button">이전</button></a>
-	</c:if>
+
+	<br>
 	
-	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
-		<a href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage+1}&year=${year}&month=${month}&day=${day}"><button type="button">다음</button></a>
-		<a href="${contextPath}/scheduleListByDate?currentPage=${resultMap.lastPage}&year=${year}&month=${month}&day=${day}"><button type="button">맨뒤</button></a>
-	</c:if>
-
-	<table border="1">
-		<tr>
-			<td>메모</td>
-			<td>일정일자</td>
-		</tr>
-
-		<c:forEach var="list" items="${resultMap.list}">
-			<tr>
-				<td>${list.scheduleMemo}</td>
-				<td><a
-					href="${contextPath}/scheduleOneByDay?scheduleDate=${list.scheduleDate}">${list.scheduleDate}</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-
-
 	<form action="${contextPath}/scheduleListByDate" method="get"
 		class="selectAct">
 		<br>
@@ -71,6 +60,63 @@
 		</select>
 		<button type="button" class="selectBtn">검색</button>
 	</form>
+
+	
+
+
+	<c:if test="${resultMap.list.size() != 0}">
+		<div>
+			<table>
+				<tr>
+					<td>메모</td>
+					<td>일정일자</td>
+				</tr>
+
+				<c:forEach var="list" items="${resultMap.list}">
+					<tr>
+						<td>${list.scheduleMemo}</td>
+						<td><a
+							href="${contextPath}/scheduleOneByDay?scheduleDate=${list.scheduleDate}">${list.scheduleDate}</a></td>
+					</tr>
+				</c:forEach>
+
+			</table>
+		</div>
+	</c:if>
+	<c:if test="${resultMap.list.size() == 0}">
+		<div>해당 날짜의 일정이 없습니다.</div>
+		<c:if
+			test="${year != null && year !='' && month != null && month != '' && day != null && day != ''}">
+			<div>
+				<a
+					href="${contextPath}/scheduleOneByDay?targetYear=${year}&targetMonth=${month-2}&targetDay=${day}"><button
+						type="button">스케쥴 등록</button></a>
+			</div>
+		</c:if>
+	</c:if>
+	
+	<!-- 페이징 버튼 -->
+		<div class="btn-group, btn-group-sm">
+	<c:if test="${resultMap.currentPage != 1}">
+		<a
+			href="${contextPath}/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
+				type="button">맨앞</button></a>
+		<a
+			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage-1}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
+				type="button">이전</button></a>
+	</c:if>
+
+	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
+		<a
+			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage+1}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
+				type="button">다음</button></a>
+		<a
+			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.lastPage}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
+				type="button">맨뒤</button></a>
+	</c:if>
+		</div>
+
+	
 </body>
 
 <script>
@@ -101,7 +147,3 @@
 					});
 </script>
 </html>
-
-
-		
-

@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	@Autowired CalendarService calendarService;
 	@Autowired ScheduleService scheduleService;	
-	
+
 	@GetMapping("/home")
 	public String home(HttpSession session, Model model, @RequestParam(required = false) Integer targetYear,
 			@RequestParam(required = false) Integer targetMonth) {
@@ -46,6 +46,7 @@ public class HomeController {
 
 		List<Map<String, Object>> scheduleList = scheduleService.getScheduleListByMonth(paramMap);
 		System.out.println(scheduleList + "<-- scheduleList");
+		
 		model.addAttribute("scheduleList", scheduleList); // 일자별 스케쥴 개 수 , 스케쥴메모 앞 5글자 미리보기 완
 
 		return "home";

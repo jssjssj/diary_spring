@@ -4,32 +4,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<h2>${loginMember.memberId}님의${targetYear}년${targetMonth+2}월
+	<h2>${loginMember.memberId}님의 ${targetYear}년${targetMonth+2}월
 		${targetDay}일 일정</h2>
-	<table border="1">
+	<table class = "table table-hover">
 		<tr>
 			<!-- <td>스케쥴 임티</td>  <-- 추후 예정 !  -->
-			<td>스케쥴 메모</td>
-			<td>작성일</td>
-			<td>수정/삭제</td>
+			<th>스케쥴 메모</th>
+			<th>작성일</th>
+			<th>수정/삭제</th>
 		</tr>
 
 		<c:forEach var="s" items="${scheduleList}">
 			<tr>
 				<!-- <td><input type="text" name="scheduleEmoji" value="${s.scheduleEmoji}" class="scheduleEmoji"> </td> -->
 				<td><input type="hidden" name="scheduleNo"
-					value="${s.scheduleNo}"> <input type="text"
-					name="scheduleMemo" value="${s.scheduleMemo}" readonly></td>
+					value="${s.scheduleNo}">${s.scheduleMemo}</td>
 				<td>${s.createdate}</td>
 				<td colspan="2"><a
-					href="${contextPath}/modifySchedule?scheduleNo=${s.scheduleNo}&scheduleMemo=${s.scheduleMemo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"><button
+					href="${contextPath}/modifySchedule?scheduleNo=${s.scheduleNo}&scheduleMemo=${s.scheduleMemo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}">
+					<button class="btn btn-outline-secondary"
 							type="button">수정</button></a> <a
-					href="${contextPath}/removeSchedule?scheduleNo=${s.scheduleNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"><button
+					href="${contextPath}/removeSchedule?scheduleNo=${s.scheduleNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"><button class="btn btn-outline-secondary"
 							type="button">삭제</button></a></td>
 			</tr>
 		</c:forEach>
@@ -41,7 +45,7 @@
 			value="${targetYear}-${targetMonth+2}-${targetDay}"> 스케쥴 추가<br>
 		<textarea rows="10" cols="50" name="scheduleMemo" class="scheduleMemo"></textarea>
 
-		<button type="button" class="addScheduleBtn">등록</button>
+		<button type="button" class="addScheduleBtn , btn btn-outline-secondary">추가</button>
 	</form>
 </body>
 <script>
