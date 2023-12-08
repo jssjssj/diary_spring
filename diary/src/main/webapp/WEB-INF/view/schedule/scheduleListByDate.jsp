@@ -58,7 +58,7 @@
 				<option>${i}</option>
 			</c:forEach>
 		</select>
-		<button type="button" class="selectBtn">검색</button>
+		<button type="button" class="selectBtn">🍳</button>
 	</form>
 
 	

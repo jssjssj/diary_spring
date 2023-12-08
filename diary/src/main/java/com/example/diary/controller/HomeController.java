@@ -32,9 +32,10 @@ public class HomeController {
 		}
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		session.setAttribute("loginMember", loginMember); // 로그인 정보 및 세션 세팅 완
-
-		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth, session);
+				
+		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth, session, loginMember.getMemberId());
 		model.addAttribute("calendarMap", calendarMap);
+		model.addAttribute("maxMinMap", calendarMap.get("maxMinMap"));
 		// 달력정보 세팅 및 전달 완
 
 		Map<String, Object> paramMap = new HashMap<>();

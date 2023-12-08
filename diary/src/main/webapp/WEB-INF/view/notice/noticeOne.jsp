@@ -4,13 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- jQuary -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<h1>공지상세</h1>
@@ -37,7 +39,7 @@
 		</table>
 	<br><br><br>
 	
-	<span class="addCommentMsg"></span>
+	<span id="addCommentMsg"></span>
 	<form method="post" action="${contextPath}/addComment"
 		id="addCommentAct">
 		<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
@@ -46,7 +48,7 @@
 		댓글PW<input type="password" name="commentPw" id="commentPw"> <br>
 		작성자<input type="text" name="memberId" value="${loginMember.memberId}"
 			readonly>
-		<button type="submit" id="addCommentBtn">등록</button>
+		<button type="button" id="addCommentBtn">등록</button>
 		<!-- 해당페이지만 제이쿼리 적용불가로 버튼 type=button이 아닌 submit으로 즉시등록 가능처리. / 추후 확인예정 -->
 	</form>
 
@@ -139,11 +141,11 @@
 	
 
 
- if($('.isSecret').change(function(){
-	 $('.isSecret').val('Y');
+ if($('#isSecret').change(function(){
+	 $('#isSecret').val('Y');
  });
  ) else {
-	 $('.isSecret').val('N');
+	 $('#isSecret').val('N');
  }  
 </script>
 </html>

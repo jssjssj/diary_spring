@@ -21,13 +21,11 @@
 		<div>'${resultMap.word}'가 포함된 일정</div>
 	</c:if>
 	<br>
-	
 
-
-<form action="${contextPath}/scheduleListByWord" method="get">
-			<input type="text" name="word">
-			<button type="submit">검색</button>
-		</form>
+	<form action="${contextPath}/scheduleListByWord" method="get">
+		<input type="text" name="word">
+		<button type="submit">🍳</button>
+	</form>
 
 	<c:if test="${resultMap.list.size()!=0}">
 		<div>

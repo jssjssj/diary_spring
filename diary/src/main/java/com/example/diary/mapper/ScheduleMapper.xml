@@ -81,7 +81,8 @@
 		<if test="word==null">
 			WHERE member_id = #{mmemberId}
 		</if>
-		LIMIT #{beginRow}, #{rowPerPage}
+		ORDER BY scheduleDate
+		LIMIT #{beginRow}, #{rowPerPage}		
 	</select>
 
 	<!-- selectScheduleListByWord 페이징 위한 전체 count 조회 -->
@@ -132,7 +133,8 @@
 	<if test="year == null and month == null and day == null">
 	WHERE member_id = #{memberId}
 	</if>
-	LIMIT #{beginRow}, #{rowPerPage}
+	ORDER BY scheduleDate
+	LIMIT #{beginRow}, #{rowPerPage}	
 </select>
 
 <!-- selectScheduleListByDate 페이징 위한 전체 count 조회 -->

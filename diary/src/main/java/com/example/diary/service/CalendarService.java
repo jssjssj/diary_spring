@@ -3,16 +3,25 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.example.diary.mapper.ScheduleMapper;
 
 import jakarta.servlet.http.HttpSession;
 
 @Service
 @Transactional
 public class CalendarService {
-	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth , HttpSession session) {
+@Autowired public ScheduleMapper scheduleMapper;
 
+	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth , HttpSession session, String memberId) {
+		Integer minYear = scheduleMapper.selectScheduleDateMinYear(memberId);
+		Integer maxYear = scheduleMapper.selectScheduleDateMaxYear(memberId);
+		Map<String, Integer> maxMinMap = new HashMap<>();
+		maxMinMap.put("minYear", minYear);
+		maxMinMap.put("maxYear", maxYear);
 		// 타겟 월의 1일
 		Calendar firstDay = Calendar.getInstance();
 		firstDay.set(Calendar.DATE, 1);
@@ -47,6 +56,7 @@ public class CalendarService {
 		resultMap.put("beginBlank", beginBlank);
 		resultMap.put("endBlank", endBlank);
 		resultMap.put("totalTd", totalTd);
+		resultMap.put("maxMinMap", maxMinMap);
 		
 		session.setAttribute("targetYear", targetYear);
 		session.setAttribute("targetMonth", targetMonth);	// 달력 내 각 일자별 스케줄표기 위해 월 , 일자 정보 전달
