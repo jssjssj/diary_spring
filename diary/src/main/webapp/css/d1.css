@@ -37,5 +37,8 @@ table{
 }
 
 textarea {
-	width: 90%
-}
+    width: 90%;
+    height: 25em;
+    border: none;
+    resize: none;
+  }
