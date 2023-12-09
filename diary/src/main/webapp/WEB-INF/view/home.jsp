@@ -6,81 +6,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- jQuary -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>	
+<link href="${contextPath}/css/d1.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<style>
-	.right{
-  	float: right;
-	}
-	.center{
-	text-align: center;
-	margin-left: auto;
- 	margin-right: auto;
-	}
-		
-</style>
 <title>Insert title here</title>
 </head>
-<body>	
-	
-<header>
-	<nav>
+<body>
+
 	<span>
-	<a href="${contextPath}/logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
-	<a href="${contextPath}/modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button></a>
-	<!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 -->
-	<%-- <a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}"><button type="button">회원탈퇴</button></a> --%>
+		<a href="${contextPath}/logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
+		<a href="${contextPath}/modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button>	</a>
+		<%-- <!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 --><a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}">
+			<button type="button">회원탈퇴</button></a> --%>
 	</span>
-		
-	<span class="right">
-	<a href="${contextPath}/noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
-	</span>
-	</nav>
-</header>
-		<div style="background-color: #B2EBF4;">
-			<div class="center">
-						<h1 class="center" style="font-size: 50px">Home</h1>
-			<div>ID : ${loginMember.memberId}</div>
-			</div>
 			
-<div>
-	<form action="${contextPath}/scheduleListByDate" method="get"
-		class="selectAct">
-		<div>조회할 연, 월, 일 을 입력하세요</div>
-		<select name="year" class="year">
-			<option value="">선택안함</option>
-			<c:forEach var="i" begin="${maxMinMap.minYear}"
-				end="${maxMinMap.maxYear}" step="1">
-				<option>${i}</option>
-			</c:forEach>
-		</select> <select name="month" class="month">
-			<option value="">선택안함</option>
-			<c:forEach var="i" begin="1" end="12" step="1">
-				<option>${i}</option>
-			</c:forEach>
-		</select> <select name="day" class="day">
-			<option value="">선택안함</option>
-			<c:forEach var="i" begin="1" end="31" step="1">
-				<option>${i}</option>
-			</c:forEach>
-		</select>
-		<button type="button" class="selectBtn">🍳</button>
-	</form>
-	<form action="${contextPath}/scheduleListByWord" method="get">
-		<input type="text" name="word" class="word" value="상세">
-		<button type="submit">🍳</button>
-	</form>
-</div>
-</div>
+	<span class="right">
+		<a href="${contextPath}/home"><button class="btn btn-outline-info" type="button">Home</button></a>
+		<a href="${contextPath}/noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
+	</span>
+
+	<div class="menubar">
+		<div class="center">
+		<br><br>
+				<h1>Home</h1>
+			<div>ID : ${loginMember.memberId}</div>
+		</div>
+
+		<form action="${contextPath}/scheduleListByDate" method="get"
+			class="selectAct">
+			<div class="selectDate"></div>
+			<select name="year" class="year">
+				<option value="">선택안함</option>
+				<c:if test="${maxMinMap.minYear!=null || maxMinMap.maxYear!=null}">
+					<c:forEach var="i" begin="${maxMinMap.minYear}"
+						end="${maxMinMap.maxYear}" step="1">
+						<option>${i}</option>
+					</c:forEach>
+				</c:if>
+			</select> 
+			
+			<select name="month" class="month">
+				<option value="">선택안함</option>
+				<c:forEach var="i" begin="1" end="12" step="1">
+					<option>${i}</option>
+				</c:forEach>
+			</select> 
+			
+			<select name="day" class="day">
+				<option value="">선택안함</option>
+				<c:forEach var="i" begin="1" end="31" step="1">
+					<option>${i}</option>
+				</c:forEach>
+			</select>
+			
+			<button type="button" class="selectBtn">🍳</button>
+		</form>
+
+		<form action="${contextPath}/scheduleListByWord" method="get">
+			<input type="text" name="word" class="word">
+			<button type="submit">🍳</button>
+		</form>
+	</div>
+
+
+	<br>
+	
+	
 	<!-- 캘린더 Month controller -->
 <div class="center">
 	<div class="btn-group btn-group-lg">
@@ -95,16 +91,16 @@
 		</div>
 	</div>
 
-	<table class="table table-bordered">
+	<table>
 		<thead>
 			<tr>
-				<th style="background-color: #4ABFD3; color: Tomato;">일</th>
-				<th style="background-color: #4ABFD3; color: white;">월</th>
-				<th style="background-color: #4ABFD3; color: white;">화</th>
-				<th style="background-color: #4ABFD3; color: white;">수</th>
-				<th style="background-color: #4ABFD3; color: white;">목</th>
-				<th style="background-color: #4ABFD3; color: white;">금</th>
-				<th style="background-color: #4ABFD3; color: DodgerBlue;">토</th>
+				<th style="color: Tomato;">일</th>
+				<th class="th">월</th>
+				<th class="th">화</th>
+				<th class="th">수</th>
+				<th class="th">목</th>
+				<th class="th">금</th>
+				<th style="color: DodgerBlue;">토</th>
 			</tr>
 		</thead>
 		<tr>
@@ -125,7 +121,7 @@
 						<div>
 							<a
 								href="${contextPath}/scheduleOneByDay?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
-								<button type="button" class="btn btn-outline-secondary">조회</button>
+								<button type="button" style="background-color:#ebfafa; border-color:#ebfafa;">조회</button>
 							</a>
 						</div>
 
@@ -141,7 +137,10 @@
 
 	</table>
 
-
+<br>
+<br>
+<br>
+<br>
 
 </body>
 <script>
@@ -170,8 +169,6 @@
 							$('.selectAct').submit();
 						}
 					});
-	$('.word').focus(function() {
-		$('.word').val('');
-	});
+
 </script>
 </html>

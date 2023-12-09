@@ -147,7 +147,7 @@ public class NoticeController {
 		}
 		Notice paramNotice = noticeService.selectNoticeOne(notice);
 		model.addAttribute("paramNotice", paramNotice);
-		System.out.println(paramNotice + "<- paramNotice!");
+		System.out.println(paramNotice + "<- paramNotice");
 		return "notice/modifyNotice";
 	}
 
