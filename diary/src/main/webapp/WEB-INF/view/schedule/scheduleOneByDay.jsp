@@ -64,15 +64,16 @@
 		</c:forEach>
 	</table>
 	<br>
+			<div class="center">하단 클릭 시 메모추가 가능</div>
 	<form method="post" class="addScheduleAct"
 		action="${contextPath}/addSchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}">
 		<div class="center">
 			<input type="hidden" name="scheduleDate"
 				value="${targetYear}-${targetMonth+2}-${targetDay}"><br>
-			<textarea style="width: 80%" name="scheduleMemo" class="scheduleMemo"></textarea>
+			<textarea name="scheduleMemo" class="scheduleMemo"></textarea>
 			<br>
 			<button type="button" class="addScheduleBtn , btn btn-outline-info">
-				일정 추가</button>
+				등록</button>
 		</div>
 	</form>
 	
