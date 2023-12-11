@@ -28,10 +28,16 @@
 			<tr>
 				<td>PW</td>
 				<td><input type="password" name="memberPw" class="memberPw"></td>
-			</tr>			
+			</tr>	
+			<tr>
+				<td></td>
+				<td colspan="2">
+					<button type="button" class="loginBtn btn btn-outline-info">로그인</button>
+					<a href="${contextPath}/addMember"><button type="button" class="btn btn-outline-info">회원가입</button></a>		
+				</td>
+			</tr>		
 		</table>
-				<button type="button" class="loginBtn btn btn-outline-info">로그인</button>
-				<a href="${contextPath}/addMember"><button type="button" class="btn btn-outline-info">회원가입</button></a>		
+		
 	</form>
 </div>
 </body>

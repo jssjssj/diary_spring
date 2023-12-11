@@ -109,11 +109,9 @@
 	<table class="center">
 		<tr>
 			<th>작성자</th>
-			<th>댓글내용</th>
+			<th>댓글내용</th>			
 			<th>삭제</th>
-			<%-- <c:if test="${loginMember.memberLevel == 1}">
-				<th>삭제</th>
-			</c:if> --%>
+	
 		</tr>
 
 		<c:forEach var="c" items="${commentList}">

@@ -18,11 +18,19 @@
 <body>
 	<form method="post" action="${contextPath}/addMember"
 		class="addMemberAct">
-		<c:if test="${alreadyId!=null}"><span>${alreadyId}</span></c:if>
+		
 		<table>
 			<tr>
 				<td>ID</td>
+				
+				<c:if test="${alreadyId==null}">
 				<td><input type="text" name="memberId" class="memberId"></td>
+				</c:if>
+				
+				<c:if test="${alreadyId!=null}">
+				<td colspan="2"><input type="text" name="memberId" class="memberId">
+				${alreadyId}</td>	<!-- 중복체크될 시 ID입력창 및 중복안내 메시지 함께표시 -->
+				</c:if>					
 			</tr>
 
 			<tr>
@@ -34,9 +42,17 @@
 				<td>PW확인</td>
 				<td><input type="password" class="memberPwCk"></td>
 			</tr>
+			
+			<tr>
+				<td></td>
+				<td colspan="2">
+					<a href="${contextPath}/login"><button type="button" class="btn btn-outline-info">뒤로가기</button></a>
+					<button type="button" class="addMemberBtn btn btn-outline-info">가입하기</button>
+				</td>
+			</tr>
 		</table>
-		<%-- <a href="${contextPath}/login"><button type="button">뒤로가기</button></a> --%>
-		<button type="button" class="addMemberBtn btn btn-outline-info">가입하기</button>
+		
+		
 	</form>
 </body>
 <script>

@@ -48,11 +48,11 @@
 
 
 		<div>
-			댓글내용 : <input type="text" name="commentContent"
+			MSG : <input type="text" name="commentContent"
 				value="${comment.commentContent}" readonly>
 		</div>
 		<div>
-			댓글PW : <input type="password" name="commentPw" class="commentPw">
+			PWA : <input type="password" name="commentPw" class="commentPw">
 		</div>		
 			<br>
 		<button type="button" class="removeCommentBtn btn btn-outline-info">삭제</button>
