@@ -108,7 +108,7 @@
 	</c:if>
 	
 	<!-- 페이징 버튼 -->
-		<div class="btn-group, btn-group-sm">
+		<div class="center">
 	<c:if test="${resultMap.currentPage != 1}">
 		<a
 			href="${contextPath}/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"

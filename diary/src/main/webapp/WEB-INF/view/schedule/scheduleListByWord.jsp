@@ -65,7 +65,7 @@
 	</c:if>
 	
 	<!-- 페이징버튼 -->	
-		<div class="btn-group, btn-group-sm">
+		<div class="center">
 	<c:if test="${resultMap.currentPage != 1}">
 		<a href="${contextPath}/scheduleListByWord?currentPage=1&word=${resultMap.word}"><button type="button" class="btn btn-primary">맨앞</button></a>
 		<a href="${contextPath}/scheduleListByWord?currentPage=${resultMap.currentPage-1}&word=${resultMap.word}"><button type="button" class="btn btn-primary">이전</button></a>
