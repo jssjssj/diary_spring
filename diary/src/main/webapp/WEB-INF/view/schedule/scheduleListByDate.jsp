@@ -101,7 +101,7 @@
 			test="${year != null && year !='' && month != null && month != '' && day != null && day != ''}">
 			<div>
 				<a
-					href="${contextPath}/scheduleOneByDay?targetYear=${year}&targetMonth=${month-2}&targetDay=${day}"><button
+					href="${contextPath}/scheduleOneByDay?targetYear=${year}&targetMonth=${month-2}&targetDay=${day}"><button class="btn btn-outline-info"
 						type="button">스케쥴 등록</button></a>
 			</div>
 		</c:if>

@@ -2,26 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.diary.mapper.CommentMapper">
 	<select id="selectCommentList" parameterType="java.util.Map"
-			resultType="com.example.diary.vo.Comment">
+		resultType="com.example.diary.vo.Comment">
 		SELECT
-			comment_no as commentNo, 
-			notice_no as noticeNo, 
-			isSecret , 
+			comment_no as commentNo,
+			notice_no as noticeNo,
+			isSecret ,
 			member_id as memberId,
-			comment_content as commentContent, 
-			createdate 
+			comment_content as commentContent,
+			createdate
 		FROM comment
 		WHERE notice_no=#{noticeNo}
-		ORDER by comment_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}	
+			ORDER by comment_no DESC
+			LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
-	
+
 	<!-- 댓글 페이징버튼 설계위한 전체 댓글 수 출력 -->
-	<select id="commentCount" parameterType="com.example.diary.vo.Comment">
-		SELECT 
-				count(comment_no)
+	<select id="commentCount"
+		parameterType="com.example.diary.vo.Comment" resultType="Integer">
+		SELECT
+			count(comment_no)
 		FROM comment
 	</select>
+	
 
 	<insert id="insertComment" parameterType="com.example.diary.vo.Comment">
 		INSERT INTO comment(
@@ -39,5 +42,20 @@
 		)	
 	</insert>
 	
+	<delete id="deleteComment_manager"
+	parameterType="com.example.diary.vo.Comment">
+	DELETE FROM comment
+	WHERE comment_no = #{commentNo}
+</delete>
+
+
+	<!-- 일반회원 전용 댓글PW입력 후 삭제 위한 매핑 / PW조회 후 삭제 위해 PW이용해 댓글정보 조회 쿼리 구현 -->
+	<delete id="deleteComment"
+		parameterType="com.example.diary.vo.Comment">
+		DELETE FROM comment
+		WHERE comment_no = #{commentNo}
+		AND
+		comment_pw = PASSWORD(#{commentPw})
+	</delete>
 	
 </mapper>

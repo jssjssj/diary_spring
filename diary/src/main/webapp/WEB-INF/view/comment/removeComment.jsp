@@ -33,7 +33,7 @@
 	<br>
 	<br>
 	<br>
-	<h3>삭제를 위해 작성 시 입력한 댓글PW를 입력해주세요</h3>
+	<h3>댓글PW 입력</h3>
 	<br>
 	<br>
 	<br>
@@ -46,23 +46,32 @@
 			<input type="hidden" name="noticeNo" value="${comment.noticeNo}">
 		</div>
 
-
-		<div>
-			MSG : <input type="text" name="commentContent"
-				value="${comment.commentContent}" readonly>
-		</div>
-		<div>
-			PWA : <input type="password" name="commentPw" class="commentPw">
-		</div>		
-			<br>
-		<button type="button" class="removeCommentBtn btn btn-outline-info">삭제</button>
+		<table class="table">
+		<tr>
+			<td colspan="2">comment
+				<input type="text" name="commentContent"
+					value="${comment.commentContent}" readonly>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">password
+				<input type="password" name="commentPw" class="commentPw">
+			</td>
+		</tr>
+		
+		<tr>
+			<td></td>
+			<td><button type="button" class="removeCommentBtn btn btn-outline-info">삭제</button></td>
+		</tr>
+		</table>
 	</form>
 </div>
 </body>
 <script>
 	$('.removeCommentBtn').click(function() {
 		if ($('.commentPw').val().length < 1) {
-			alert('댓글 작성 시 입력한 pw를 입력하세요');
+			alert('댓글 작성 시 입력한 PW를 입력하세요');
 			return;
 		} else {
 			$('.removeCommentAct').submit();
