@@ -16,7 +16,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <div>
 	<form method="post" action="${contextPath}/login" class="loginAct">
 		<table class="table table-border">
@@ -40,6 +39,7 @@
 		
 	</form>
 </div>
+
 </body>
 <script>
 	$('.loginBtn').click(function() {

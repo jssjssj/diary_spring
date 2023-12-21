@@ -23,11 +23,11 @@
 			<tr>
 				<td>ID</td>
 				
-				<c:if test="${alreadyId==null}">
+				<c:if test="${alreadyId==null}"><!-- ID 중복확인 -->
 				<td><input type="text" name="memberId" class="memberId"></td>
 				</c:if>
 				
-				<c:if test="${alreadyId!=null}">
+				<c:if test="${alreadyId!=null}"><!-- ID 중복확인 -->
 				<td colspan="2"><input type="text" name="memberId" class="memberId">
 				${alreadyId}</td>	<!-- 중복체크될 시 ID입력창 및 중복안내 메시지 함께표시 -->
 				</c:if>					
