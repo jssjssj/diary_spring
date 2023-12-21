@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 @Transactional
 public class ScheduleService {
 	@Autowired 
-	 ScheduleMapper scheduleMapper;
+	private ScheduleMapper scheduleMapper;
 	
 	public List<Map<String,Object>> getScheduleListByMonth(Map<String, Object> paramMap) {		
 		List<Map<String,Object>> scheduleList = new ArrayList<>();

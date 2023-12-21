@@ -80,13 +80,11 @@
 	<!-- 캘린더 Month controller -->
 <div class="center">
 	<div class="btn-group btn-group-lg">
-		<a
-			href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}"><button
+		<a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}"><button
 				type="button" class="btn btn-outline-info">◀</button></a> &nbsp;
 		<h3 class="center">${calendarMap.targetYear}년
 			${calendarMap.targetMonth + 1}월</h3>
-		&nbsp; <a
-			href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"><button
+		&nbsp; <a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"><button
 				type="button" class="btn btn-outline-info">▶</button></a>
 		</div>
 	</div>

@@ -36,4 +36,10 @@
     <filter-name>SessionCheckFilter</filter-name>
     <url-pattern>/SessionCheckFilter</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>com.example.diary.listener.SessionCounterListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.example.diary.listener.SessionCounterListener</listener-class>
+  </listener>
 </web-app>

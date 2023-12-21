@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ScheduleController {
-	@Autowired ScheduleService scheduleService;
+	@Autowired private ScheduleService scheduleService;
 	
 	@GetMapping("/scheduleOneByDay")
 	public String scheduleByDay(Schedule schedule, HttpSession session, String scheduleDate, Integer targetYear,

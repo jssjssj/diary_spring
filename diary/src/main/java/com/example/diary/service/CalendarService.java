@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 @Service
 @Transactional
 public class CalendarService {
-@Autowired public ScheduleMapper scheduleMapper;
+@Autowired private ScheduleMapper scheduleMapper;
 
 	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth , HttpSession session, String memberId) {
 		Integer minYear = scheduleMapper.selectScheduleDateMinYear(memberId);
