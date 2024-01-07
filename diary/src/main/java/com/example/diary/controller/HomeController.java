@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.diary.listener.SessionCounterListener;
+
 import com.example.diary.service.CalendarService;
-import com.example.diary.service.CounterService;
+
 import com.example.diary.service.ScheduleService;
 import com.example.diary.vo.Member;
 
@@ -45,10 +45,8 @@ public class HomeController {
 
 		paramMap.put("targetYear", session.getAttribute("targetYear"));
 		paramMap.put("targetMonth", session.getAttribute("targetMonth"));
-		System.out.println(paramMap + "<-- paramMap");
 
 		List<Map<String, Object>> scheduleList = scheduleService.getScheduleListByMonth(paramMap);
-		System.out.println(scheduleList + "<-- scheduleList");
 		
 		model.addAttribute("scheduleList", scheduleList); // 일자별 스케쥴 개 수 , 스케쥴메모 앞 5글자 미리보기 완		
 		

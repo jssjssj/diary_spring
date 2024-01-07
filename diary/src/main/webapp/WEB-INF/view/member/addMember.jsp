@@ -4,33 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- jQuary -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="${contextPath}/css/d1.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/view/inc/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
 	<form method="post" action="${contextPath}/addMember"
 		class="addMemberAct">
 		
 		<table>
 			<tr>
 				<td>ID</td>
-				
-				<c:if test="${alreadyId==null}"><!-- ID 중복확인 -->
 				<td><input type="text" name="memberId" class="memberId"></td>
-				</c:if>
-				
-				<c:if test="${alreadyId!=null}"><!-- ID 중복확인 -->
-				<td colspan="2"><input type="text" name="memberId" class="memberId">
-				${alreadyId}</td>	<!-- 중복체크될 시 ID입력창 및 중복안내 메시지 함께표시 -->
-				</c:if>					
 			</tr>
 
 			<tr>

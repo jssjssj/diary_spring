@@ -32,11 +32,14 @@ public class MemberController {
 		// 로그인 전에만
 		Member loginMember = memberService.login(paramMember);
 		if (loginMember == null) {
+			log.info("로그인 필요");
 			return "redirect:/login";
+		} else {
+			log.info("로그인 성공");
+			session.setAttribute("loginMember", loginMember);
+			return "redirect:/home";
 		}
-		System.out.println(loginMember + "<--loginMember");
-		session.setAttribute("loginMember", loginMember);
-		return "redirect:/home";
+		
 	}
 
 	@GetMapping("/logout")
@@ -51,17 +54,12 @@ public class MemberController {
 	}
 
 	@PostMapping("/addMember")
-	public String addMember(Member paramMember , Model model) {
-		Member loginMember = memberService.login(paramMember);
-		if (loginMember != null) {
-			String alreadyId = "중복 아이디입니다.";
-			model.addAttribute("alreadyId", alreadyId);
-			return "member/addMember";
-		} else {
-		System.out.println(paramMember + "<--member");
+	public String addMember(Member paramMember , Model model) {		
+			
 		memberService.addMember(paramMember);
+		log.info("정상 가입");
 		return "member/login";
-		}
+		
 	}
 	
 	@GetMapping("/removeMember")
@@ -70,7 +68,7 @@ public class MemberController {
 		if (loginMember == null) {
 			return "member/login";
 		}
-		System.out.println(member);
+		
 		model.addAttribute("member", member);
 		return "member/removeMember";
 	}
@@ -83,7 +81,7 @@ public class MemberController {
 		paramMember.setMemberPw(member.getMemberPw());
 
 		Member removeMember = memberService.login(paramMember);
-		System.out.println(removeMember + "<--removeMember!!");
+		
 		if (removeMember != null) {
 			memberService.removeMember(loginMember);
 			return "member/login";
@@ -105,19 +103,19 @@ public class MemberController {
 	@PostMapping("/modifyMember")
 	public String modifyMember(Member member, HttpSession session, String memberNewPw) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		System.out.println(member);
+		
 		// 현재PW 일치여부 확인위해 객체설정 및 대입 -> checkMember가 존재해야 정보수정 가능
 		Member paramMember = new Member();
 		paramMember.setMemberId(loginMember.getMemberId());
 		paramMember.setMemberPw(member.getMemberPw());
 
 		Member checkMember = memberService.login(paramMember);
-		System.out.println(checkMember + "<-- checkMember"); // 디버킹 -> null값 아닐 시 정보수정 가능
+		
 		if (checkMember != null) {
 			Member modifyMember = new Member();
 			modifyMember.setMemberNo(loginMember.getMemberNo());
 			modifyMember.setMemberPw(memberNewPw);
-			System.out.println(modifyMember + "<--modifyMember");
+		
 			memberService.modifyMember(modifyMember);
 			return "member/login";
 		} else {

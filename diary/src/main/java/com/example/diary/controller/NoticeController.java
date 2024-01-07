@@ -65,7 +65,7 @@ public class NoticeController {
 			return "member/login";
 		}
 		Notice paramNotice = noticeService.selectNoticeOne(notice);
-		System.out.println(loginMember + "<-- loginMember");
+		
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("notice", paramNotice); // noticeOne 출력 완
 
@@ -75,13 +75,13 @@ public class NoticeController {
 		Map<String, Object> commentMap = new HashMap<>();
 
 		commentMap.put("noticeNo", notice.getNoticeNo());
-		System.out.println(notice.getNoticeNo() + "<--- noticeNo!!!");
+		
 		commentMap.put("beginRow", beginRow);
 		commentMap.put("rowPerPage", rowPerPage);
-		System.out.println(commentMap + "<--- commentMap!!!"); // 맵 구성확인 디버깅
+	
 
 		List<Comment> commentList = commentService.selectCommentList(commentMap);
-		System.out.println(commentList + "<-- commentList");
+	
 		model.addAttribute("commentList", commentList); // 맵 삽입 후 결과값확인 디버깅 및 페이지로 전달
 
 		int totalRow = commentService.commentCount();
@@ -124,13 +124,13 @@ public class NoticeController {
 			return "member/login";
 		}
 		model.addAttribute("notice", notice);
-		System.out.println(notice);
+	
 		return "notice/removeNotice";
 	}
 
 	@PostMapping(value = "/removeNotice")
 	public String removeNotice(Notice notice) {
-		System.out.println(notice);
+		
 		noticeService.deleteNotice(notice);
 		return "redirect:/noticeList";
 	}
@@ -147,14 +147,14 @@ public class NoticeController {
 		}
 		Notice paramNotice = noticeService.selectNoticeOne(notice);
 		model.addAttribute("paramNotice", paramNotice);
-		System.out.println(paramNotice + "<- paramNotice");
+		
 		return "notice/modifyNotice";
 	}
 
 	@PostMapping(value = "/modifyNotice")
 	public String modifyNotice(Notice notice, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		System.out.println(notice);
+		
 		notice.setMemberId(loginMember.getMemberId());
 		noticeService.updateNotice(notice);
 		return "redirect:/noticeList";

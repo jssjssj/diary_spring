@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.tags.shaded.org.apache.xpath.functions.FuncSubstring;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import com.example.diary.service.ScheduleService;
 import com.example.diary.vo.Member;
 import com.example.diary.vo.Schedule;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,7 +58,7 @@ public class ScheduleController {
 	public String addScheduleByDay(Schedule schedule, HttpSession session, Integer targetYear, Integer targetMonth,
 			Integer targetDay, Model model) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		System.out.println(schedule.getScheduleDate()); // 날짜값 확인 - 디버깅
+		
 
 		schedule.setMemberId(loginMember.getMemberId());
 		scheduleService.insertSchedule(schedule);
@@ -95,7 +95,7 @@ public class ScheduleController {
 	
 	@PostMapping("/modifySchedule")
 	public String modifyScheduleByDay(Schedule schedule, Integer targetYear, Integer targetMonth, Integer targetDay) {
-		System.out.println(schedule + " <-- 스케쥴 메모 toString()");
+	
 		scheduleService.updateSchedule(schedule);
 
 		String url = "redirect:/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
@@ -140,7 +140,7 @@ public class ScheduleController {
 		Map<String, Object> resultMap = scheduleService.getScheduleListByDate(year, month, day, currentPage,
 				loginMember.getMemberId());
 		model.addAttribute("resultMap", resultMap);
-		System.out.println(resultMap.get("list.size()") + "<-- resultMap.get(\"list\").size()");
+	
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		model.addAttribute("day", day);
