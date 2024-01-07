@@ -33,8 +33,6 @@ public class CalendarService {
 		// 1월에서 -1, 12월 +1 이 되면 CalendarAPI에서 자동으로 년과 월이 변경된다
 		targetYear = firstDay.get(Calendar.YEAR);
 		targetMonth = firstDay.get(Calendar.MONTH);
-		System.out.println(targetYear + "<-- targetYear");
-		System.out.println(targetMonth + "<-- targetMonth");
 		
 		
 		// firstDate는 1일, lastDate는 API통해서 구한다
@@ -60,8 +58,6 @@ public class CalendarService {
 		
 		session.setAttribute("targetYear", targetYear);
 		session.setAttribute("targetMonth", targetMonth);	// 달력 내 각 일자별 스케줄표기 위해 월 , 일자 정보 전달
-		
-		System.out.println(resultMap + "<-- resultMap");
 		
 		return resultMap;
 	}

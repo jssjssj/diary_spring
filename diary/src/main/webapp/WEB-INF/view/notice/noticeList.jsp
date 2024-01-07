@@ -25,6 +25,7 @@
 		<tr>
 			<th>공지번호</th>
 			<th>제목</th>
+			<th>작성자</th>
 			<th>등록일</th>
 			<c:if test="${loginMember.memberLevel == 1}">
 				<th>수정/삭제</th>
@@ -35,6 +36,10 @@
 			<tr>
 				<td>${n.noticeNo}</td>
 				<td><a href="${contextPath}/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
+				<td>
+					<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
+					<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
+				</td>
 				<td>${n.createdate}</td>
 				<c:if test="${loginMember.memberLevel == 1}">
 					<td colspan="2"><a

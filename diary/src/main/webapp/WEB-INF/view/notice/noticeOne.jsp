@@ -76,7 +76,7 @@
 				<tr>
 					<td>작성자</td>
 					<td>${loginMember.memberId}</td>
-					<td><input type="checkbox" name="isSecret" id="isSecret">비밀글</td>
+					<td><input type="checkbox" id="secret"><label for="secret">비밀글</label><input type="hidden" name="isSecret"></td>
 					<td><button class="btn btn-outline-info" type="submit"
 							id="addCommentBtn">등록</button></td>
 
@@ -183,11 +183,12 @@
 	 });
 	
 
- if($('#isSecret').change(function(){
-	 $('#isSecret').val('Y');
+ $('#secret').change(function(){
+	 if($('#secret').is(':checked')==true){
+		 $('#isSecret').val('Y');
+	 } else {
+		 $('#isSecret').val('N');
+	 }
  });
- ) else {
-	 $('#isSecret').val('N');
- }  
 </script>
 </html>

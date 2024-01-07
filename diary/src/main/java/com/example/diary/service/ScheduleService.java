@@ -130,7 +130,6 @@ public class ScheduleService {
 		
 		//스케줄 리스트
 		Map<String, Object> paramMap = new HashMap<>();
-		System.out.println(memberId + "<-- memberId");
 		paramMap.put("memberId", memberId);
 		
 		if(year.equals("")) {
@@ -157,9 +156,7 @@ public class ScheduleService {
 		int rowPerPage = 10;
 		int beginRow = (currentPage-1)*rowPerPage;
 
-		System.out.println(paramMap + "<-- totalRow 도출 전 paramMap");
 		int totalRow = scheduleMapper.selectCountScheduleListByDate(paramMap);
-		System.out.println(totalRow + "<---- totalRow");
 		int lastPage = totalRow/rowPerPage;
 		
 		if(totalRow==0) {
@@ -173,7 +170,6 @@ public class ScheduleService {
 		
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("beginRow", beginRow);
-		System.out.println(paramMap + "<-- final paramMap");
 		List<Schedule> list = scheduleMapper.selectScheduleListByDate(paramMap);
 		
 		//반환 맵
