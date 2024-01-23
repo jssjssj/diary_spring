@@ -16,7 +16,7 @@
 		<h2>공지 작성</h2>
 	</div>
 	<form method="post"
-		action="${pageContext.request.contextPath}/addNotice"
+		action="${pageContext.request.contextPath}/notice/addNotice"
 		class="addNoticeAct">
 		<table class="table">
 

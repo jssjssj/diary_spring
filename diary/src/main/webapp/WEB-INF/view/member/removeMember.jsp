@@ -11,22 +11,22 @@
 <body>
 	<jsp:include page="/WEB-INF/view/inc/menubar.jsp"></jsp:include>
 
-	<form action="${contextPath}/removeMember" method="post"
-		class="removeMemberAct">
-		<div>탈퇴를 위해 PW를 입력하세요</div>
-		<div>
-			<input type="password" name="memberPw" class="memberPw">
-		</div>
-		<button type="button" class="removeMemberBtn">탈퇴하기</button>
+
+	<form action="${contextPath}/member/removeMember" method="post"
+		id="removeMemberAct">
+			<div>탈퇴를 위해 PW를 입력하세요</div>
+			<div><input type="password" name="memberPw" id="memberPw" placeholder="PW입력"></div>
+		<button type="button" class="btn btn-outline-danger" id="removeMemberBtn">탈퇴하기</button>
 	</form>
+
 </body>
 <script>
-	$('.removeMemberBtn').click(function() {
-		if ($('.memberPw').val().length < 1) {
+	$('#removeMemberBtn').click(function() {
+		if ($('#memberPw').val().length < 1) {
 			alert('PW를 입력하세요');
 			return;
 		} else {
-			$('.removeMemberAct').submit();
+			$('#removeMemberAct').submit();
 		}
 	});
 </script>

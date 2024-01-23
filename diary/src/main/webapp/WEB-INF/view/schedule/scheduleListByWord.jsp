@@ -24,7 +24,7 @@
 	</div>
 	<br>
 		<div class="center">
-	<form action="${contextPath}/scheduleListByWord" method="get">
+	<form action="${contextPath}/schedule/scheduleListByWord" method="get">
 		<input type="text" name="word">
 		<button type="submit">🍳</button>
 	</form>
@@ -41,7 +41,7 @@
 					<tr>
 						<td>${s.scheduleMemo}</td>
 						<td><a
-							href="${contextPath}/scheduleOneByDay?scheduleDate=${s.scheduleDate}">${s.scheduleDate}</a></td>
+							href="${contextPath}/schedule/scheduleOneByDay?scheduleDate=${s.scheduleDate}">${s.scheduleDate}</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -51,13 +51,13 @@
 	<!-- 페이징버튼 -->	
 		<div class="center">
 	<c:if test="${resultMap.currentPage != 1}">
-		<a href="${contextPath}/scheduleListByWord?currentPage=1&word=${resultMap.word}"><button type="button" class="btn btn-primary">맨앞</button></a>
-		<a href="${contextPath}/scheduleListByWord?currentPage=${resultMap.currentPage-1}&word=${resultMap.word}"><button type="button" class="btn btn-primary">이전</button></a>
+		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=1&word=${resultMap.word}" class="btn btn-primary">맨앞</a>
+		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.currentPage-1}&word=${resultMap.word}" class="btn btn-primary">이전</a>
 	</c:if>
 	
 	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
-		<a href="${contextPath}/scheduleListByWord?currentPage=${resultMap.currentPage+1}&word=${resultMap.word}"><button type="button" class="btn btn-primary">다음</button></a>
-		<a href="${contextPath}/scheduleListByWord?currentPage=${resultMap.lastPage}&word=${resultMap.word}"><button type="button" class="btn btn-primary">맨뒤</button></a>
+		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.currentPage+1}&word=${resultMap.word}" class="btn btn-primary">다음</a>
+		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.lastPage}&word=${resultMap.word}" class="btn btn-primary">맨뒤</a>
 	</c:if>
 		</div>
 		

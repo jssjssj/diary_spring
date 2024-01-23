@@ -12,22 +12,22 @@
 	<jsp:include page="/WEB-INF/view/inc/menubar.jsp"></jsp:include>
 	
 	<form method="post"
-		action="${contextPath}/modifySchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"
+		action="${contextPath}/schedule/modifySchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"
 		class="modifyScheduleAct">
 <br>
 	<div class="center">
-		<h2>${targetYear}-${targetMonth+2}-${targetDay}일정 수정</h2>
+		<h2>${targetYear}년 ${targetMonth}월 ${targetDay}일 일정 수정</h2>
 		<input type="hidden" name="scheduleNo" value="${schedule.scheduleNo}">
 	</div>	
 
 		<table>
 			<tr>
-				<th style="text-align: center">메모</th>
+				<th>메모</th>
 				<!-- <th>이모지</th> -->
 				
 			</tr>
 			<tr>
-				<td><textarea name="scheduleMemo" class="scheduleMemo">${schedule.scheduleMemo}</textarea></td>			
+				<th><textarea name="scheduleMemo" class="scheduleMemo" rows="10" cols="160" style="resize: none;">${schedule.scheduleMemo}</textarea></th>			
 				<%-- <td><input type="" name="scheduleEmoji" value="${schedule.scheduleEmoji}" class="scheduleEmoji"></td> --%>
 			</tr>
 		</table>

@@ -34,7 +34,7 @@
 </div>
 	
 	
-	<form action="${contextPath}/scheduleListByDate" method="get"
+	<form action="${contextPath}/schedule/scheduleListByDate" method="get"
 		class="selectAct">
 		<br>
 		<div>조회할 연, 월, 일 을 입력하세요</div>
@@ -73,7 +73,7 @@
 					<tr>
 						<td>${list.scheduleMemo}</td>
 						<td><a
-							href="${contextPath}/scheduleOneByDay?scheduleDate=${list.scheduleDate}">${list.scheduleDate}</a></td>
+							href="${contextPath}/schedule/scheduleOneByDay?scheduleDate=${list.scheduleDate}">${list.scheduleDate}</a></td>
 					</tr>
 				</c:forEach>
 
@@ -86,8 +86,7 @@
 			test="${year != null && year !='' && month != null && month != '' && day != null && day != ''}">
 			<div>
 				<a
-					href="${contextPath}/scheduleOneByDay?targetYear=${year}&targetMonth=${month-2}&targetDay=${day}"><button class="btn btn-outline-info"
-						type="button">스케쥴 등록</button></a>
+					href="${contextPath}/schedule/scheduleOneByDay?targetYear=${year}&targetMonth=${month-2}&targetDay=${day}" class="btn btn-primary">스케쥴 등록</a>
 			</div>
 		</c:if>
 	</c:if>
@@ -96,20 +95,16 @@
 		<div class="center">
 	<c:if test="${resultMap.currentPage != 1}">
 		<a
-			href="${contextPath}/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
-				type="button">맨앞</button></a>
+			href="${contextPath}/schedule/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}" class="btn btn-primary">맨앞</a>
 		<a
-			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage-1}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
-				type="button">이전</button></a>
+			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.currentPage-1}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">이전</a>
 	</c:if>
 
 	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
 		<a
-			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.currentPage+1}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
-				type="button">다음</button></a>
+			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.currentPage+1}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">다음</a>
 		<a
-			href="${contextPath}/scheduleListByDate?currentPage=${resultMap.lastPage}&year=${year}&month=${month}&day=${day}"><button class="btn btn-primary"
-				type="button">맨뒤</button></a>
+			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.lastPage}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">맨뒤</a>
 	</c:if>
 		</div>
 

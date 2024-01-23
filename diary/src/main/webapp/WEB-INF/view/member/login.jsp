@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-	<form method="post" action="${contextPath}/login" class="loginAct">
+	<form method="post" action="${contextPath}/member/login" class="loginAct">
 		<table class="table table-border">
 			<tr>
 				<td>ID</td>
@@ -25,7 +25,7 @@
 				<td></td>
 				<td colspan="2">
 					<button type="button" class="loginBtn btn btn-outline-info">로그인</button>
-					<a href="${contextPath}/addMember"><button type="button" class="btn btn-outline-info">회원가입</button></a>		
+					<a href="${contextPath}/member/addMember" class="btn btn-outline-info">회원가입</a>		
 				</td>
 			</tr>		
 		</table>

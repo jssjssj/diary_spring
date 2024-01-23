@@ -18,9 +18,9 @@
 	<h1>공지수정</h1>
 	
 	</div>
-	<form method="post" action="${contextPath}/modifyNotice"
+	<form method="post" action="${contextPath}/notice/modifyNotice"
 		class="modifyAct">
-		<table>
+		<table class="table">
 
 			<tr>
 				<td>공지번호</td>
@@ -38,7 +38,7 @@
 			<tr>
 				<td>내용</td>
 				<td>
-					<textarea rows="10" cols="50" name="noticeContent" class="noticeContent">${paramNotice.noticeContent}</textarea>
+					<textarea rows="30" cols="150" name="noticeContent" class="noticeContent">${paramNotice.noticeContent}</textarea>
 				</td>
 			</tr>
 

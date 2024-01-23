@@ -5,8 +5,7 @@
 				resultType="java.util.Map">
 			SELECT 
 				day(SCHEDULE_date) AS day, 
-				COUNT(*) AS cnt, 
-				GROUP_CONCAT(substr(SCHEDULE_memo,1,3),'..') AS memo
+				COUNT(*) AS cnt
 		FROM SCHEDULE
 		WHERE member_id = #{memberId}
 		AND YEAR(schedule_date) = #{targetYear}

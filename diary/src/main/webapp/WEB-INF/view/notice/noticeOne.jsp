@@ -14,15 +14,12 @@
 	<div class="center , menubar">
 			<br> 
 			<br>
-		<h2>공지상세</h2>
-			<br>
-	</div>
-			<br>
+		<h2>공지상세</h2>			
+	</div>			
 
 	<c:if test="${loginMember.memberLevel==1}">
 		<div class="center">
-			<a href="${contextPath}/modifyNotice?noticeNo=${notice.noticeNo}"><button
-					class="btn btn-outline-info" type="button">수정</button></a>
+			<a class="btn btn-outline-info" href="${contextPath}/notice/modifyNotice?noticeNo=${notice.noticeNo}">수정</a>
 		</div>
 	</c:if>
 
@@ -39,7 +36,7 @@
 
 		<tr>
 			<td>내용</td>
-			<td><textarea rows="60" readonly>${notice.noticeContent}</textarea></td>
+			<td><textarea rows="40" cols="120" readonly>${notice.noticeContent}</textarea></td>
 		</tr>
 
 		<tr>
@@ -53,7 +50,7 @@
 		<br>
 	</div>
 	<div class="center">
-		<form method="post" action="${contextPath}/addComment"
+		<form method="post" action="${contextPath}/comment/addComment"
 			id="addCommentAct">
 			<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
 			<input type="hidden" name="memberId" value="${loginMember.memberId}">
@@ -88,7 +85,7 @@
 		<br>
 		<br>
 
-	<table class="center">
+	<table class="table table-sm">
 		<tr>
 			<th>작성자</th>
 			<th>댓글내용</th>			
@@ -129,17 +126,15 @@
 
 				<c:if test="${loginMember.memberLevel == 1}">
 					<!-- 관리자용 즉시삭제 -->
-					<td><a
-						href="${contextPath}/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}"><button
-								class="btn btn-outline-info" type="button">삭제</button></a></td>
+					<td><a class="btn btn-outline-info"
+						href="${contextPath}/comment/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}">삭제</a></td>
 				</c:if>
 
 				<c:if
 					test="${loginMember.memberLevel != 1 && loginMember.memberId == c.memberId}">
 					<!--회원용 삭제페이지 이동 -->
-					<td><a
-						href="${contextPath}/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}"><button
-								class="btn btn-outline-info" type="button">삭제</button></a></td>
+					<td><a class="btn btn-outline-info"
+						href="${contextPath}/comment/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}">삭제</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>
@@ -148,13 +143,13 @@
 
 	<!-- 페이징 버튼 -->
 			<c:if test="${currentPage!=1}">
-				<a href="${contextPath}/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}"><button type="button">맨앞</button></a>
-				<a href="${contextPath}/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}"><button type="button">이전</button></a>
+				<a href="${contextPath}/notice/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}">맨앞</a>
+				<a href="${contextPath}/notice/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}">이전</a>
 			</c:if>
 			
 			<c:if test="${currentPage!=lastPage}">
-				<a href="${contextPath}/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}"><button type="button">다음</button></a>
-				<a href="${contextPath}/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}"><button type="button">맨뒤</button></a>
+				<a href="${contextPath}/notice/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}">다음</a>
+				<a href="${contextPath}/notice/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}">맨뒤</a>
 			</c:if>
 	<br>
 	<br>
@@ -165,7 +160,7 @@
 	<br>
 	<br>
 
-<!-- 하단바 추가전까지 임시 공간확보 -->
+
 	
 			
 </body>

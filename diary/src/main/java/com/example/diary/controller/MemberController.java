@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.diary.service.CommentService;
 import com.example.diary.service.MemberService;
+import com.example.diary.service.NoticeService;
+import com.example.diary.service.ScheduleService;
 import com.example.diary.vo.Member;
 
 import jakarta.servlet.http.HttpSession;
@@ -14,12 +18,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private CommentService commentService;
+	@Autowired
+	private NoticeService noticeService;
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	@GetMapping("/login")
-	public String login(HttpSession session, Model model) {
+	public String login(HttpSession session) {
 		// 로그인 전에만
 		if (session.getAttribute("loginMember") != null) {
 			return "redirect:/home";
@@ -30,16 +41,12 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(HttpSession session, Member paramMember) {
 		// 로그인 전에만
-		Member loginMember = memberService.login(paramMember);
-		if (loginMember == null) {
-			log.info("로그인 필요");
-			return "redirect:/login";
-		} else {
-			log.info("로그인 성공");
-			session.setAttribute("loginMember", loginMember);
-			return "redirect:/home";
-		}
 		
+		if(memberService.login(paramMember) != null) {
+			Member loginMember = memberService.login(paramMember);
+			session.setAttribute("loginMember", loginMember);
+		}
+			return "redirect:/home";			
 	}
 
 	@GetMapping("/logout")
@@ -83,6 +90,7 @@ public class MemberController {
 		Member removeMember = memberService.login(paramMember);
 		
 		if (removeMember != null) {
+			// todo: commentDelete, noticeDelete, scheduleDelete
 			memberService.removeMember(loginMember);
 			return "member/login";
 		} else {

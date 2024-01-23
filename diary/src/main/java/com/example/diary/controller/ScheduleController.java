@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.diary.service.ScheduleService;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/schedule")
 public class ScheduleController {
 	@Autowired private ScheduleService scheduleService;
 	
@@ -63,7 +65,7 @@ public class ScheduleController {
 		schedule.setMemberId(loginMember.getMemberId());
 		scheduleService.insertSchedule(schedule);
 
-		String url = "redirect:/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
+		String url = "redirect:/schedule/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
 				+ "&targetDay=" + targetDay;
 		return url;
 	}
@@ -72,7 +74,7 @@ public class ScheduleController {
 	public String removeScheduleByDay(Schedule schedule, Integer targetYear, Integer targetMonth, Integer targetDay) {
 		scheduleService.deleteSchedule(schedule);
 
-		String url = "redirect:/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
+		String url = "redirect:/schedule/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
 				+ "&targetDay=" + targetDay;
 		return url;
 	}
@@ -98,7 +100,7 @@ public class ScheduleController {
 	
 		scheduleService.updateSchedule(schedule);
 
-		String url = "redirect:/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
+		String url = "redirect:/schedule/scheduleOneByDay?targetYear=" + targetYear + "&targetMonth=" + targetMonth
 				+ "&targetDay=" + targetDay;
 		return url;
 	}

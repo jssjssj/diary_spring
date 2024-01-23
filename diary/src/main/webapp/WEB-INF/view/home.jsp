@@ -21,9 +21,9 @@
 			<div>ID : ${loginMember.memberId}</div>
 		</div>
 
-		<form action="${contextPath}/scheduleListByDate" method="get"
+		<form action="${contextPath}/schedule/scheduleListByDate" method="get"
 			class="selectAct">
-			<div class="selectDate"></div>
+			
 			<select name="year" class="year">
 				<option value="">선택안함</option>
 				<c:if test="${maxMinMap.minYear!=null || maxMinMap.maxYear!=null}">
@@ -51,37 +51,35 @@
 			<button type="button" class="selectBtn">🍳</button>
 		</form>
 
-		<form action="${contextPath}/scheduleListByWord" method="get">
+		<form action="${contextPath}/schedule/scheduleListByWord" method="get">
 			<input type="text" name="word" class="word">
 			<button type="submit">🍳</button>
 		</form>
 	</div>
 
 
-	<br>
+		<br>
 	
 	
 	<!-- 캘린더 Month controller -->
 <div class="center">
 	<div class="btn-group btn-group-lg">
-		<a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}"><button
-				type="button" class="btn btn-outline-info">◀</button></a> &nbsp;
+		<a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}" class="btn btn-outline-info">◀</a> &nbsp;
 		<h3 class="center">${calendarMap.targetYear}년
 			${calendarMap.targetMonth + 1}월</h3>
-		&nbsp; <a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"><button
-				type="button" class="btn btn-outline-info">▶</button></a>
+		&nbsp; <a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"  class="btn btn-outline-info">▶</a>
 		</div>
 	</div>
-
-	<table>
+	
+	<table class="table">
 		<thead>
 			<tr>
 				<th style="color: Tomato;">일</th>
-				<th class="th">월</th>
-				<th class="th">화</th>
-				<th class="th">수</th>
-				<th class="th">목</th>
-				<th class="th">금</th>
+				<th>월</th>
+				<th>화</th>
+				<th>수</th>
+				<th>목</th>
+				<th>금</th>
 				<th style="color: DodgerBlue;">토</th>
 			</tr>
 		</thead>
@@ -102,7 +100,7 @@
 						</c:forEach>
 						<div>
 							<a
-								href="${contextPath}/scheduleOneByDay?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
+								href="${contextPath}/schedule/scheduleOneByDay?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
 								<button type="button" style="background-color:#ebfafa; border-color:#ebfafa;">조회</button>
 							</a>
 						</div>

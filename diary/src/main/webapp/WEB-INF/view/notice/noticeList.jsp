@@ -16,12 +16,11 @@
 	</div>
 	<c:if test="${loginMember.memberLevel == 1}">
 			<div class="center">
-		<a href="${pageContext.request.contextPath}/addNotice"><button class="btn btn-outline-info"
-				type="button">공지추가</button></a>
+		<a href="${pageContext.request.contextPath}/notice/addNotice" class="btn btn-outline-info">공지추가</a>
 			</div>
 			<br>
 	</c:if>
-	<table>
+	<table class="table">
 		<tr>
 			<th>공지번호</th>
 			<th>제목</th>
@@ -33,32 +32,32 @@
 		</tr>
 
 		<c:forEach var="n" items="${list}">
-			<tr>
-				<td>${n.noticeNo}</td>
-				<td><a href="${contextPath}/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-				<td>
-					<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
-					<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
-				</td>
-				<td>${n.createdate}</td>
-				<c:if test="${loginMember.memberLevel == 1}">
-					<td colspan="2"><a
-						href="${contextPath}/modifyNotice?noticeNo=${n.noticeNo}"><button class="btn btn-outline-info"
-								type="button">수정</button></a> <a
-						href="${contextPath}/removeNotice?noticeNo=${n.noticeNo}"><button class="btn btn-outline-info"
-								type="button">삭제</button></a></td>
-				</c:if>
-			</tr>
+			<tbody>
+				<tr>
+					<td>${n.noticeNo}</td>
+					<td><a href="${contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
+					<td>
+						<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
+						<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
+					</td>
+					<td>${n.createdate}</td>
+					<c:if test="${loginMember.memberLevel == 1}">
+						<td colspan="2"><a class="btn btn-outline-info"
+							href="${contextPath}/notice/modifyNotice?noticeNo=${n.noticeNo}">수정</a> <a class="btn btn-outline-info"
+							href="${contextPath}/notice/removeNotice?noticeNo=${n.noticeNo}">삭제</a></td>
+					</c:if>
+				</tr>
+			</tbody>
 		</c:forEach>
 	</table>
 	<c:if test="${currentPage!=1}">
-		<a href="${contextPath}/noticeList?currentPage=1"><button type="button">처음</button></a>		
-		<a href="${contextPath}/noticeList?currentPage=${currentPage-1}"><button type="button">이전</button></a>
+		<a href="${contextPath}/notice/noticeList?currentPage=1"><button type="button">처음</button></a>		
+		<a href="${contextPath}/notice/noticeList?currentPage=${currentPage-1}"><button type="button">이전</button></a>
 	</c:if>	
 		
 	<c:if test="${currentPage!=lastPage}">
-		<a href="${contextPath}/noticeList?currentPage=${currentPage+1}"><button type="button">다음</button></a>	
-		<a href="${contextPath}/noticeList?currentPage=${lastPage}"><button type="button">마지막</button></a>	
+		<a href="${contextPath}/notice/noticeList?currentPage=${currentPage+1}"><button type="button">다음</button></a>	
+		<a href="${contextPath}/notice/noticeList?currentPage=${lastPage}"><button type="button">마지막</button></a>	
 	</c:if>	
 	
 </body>

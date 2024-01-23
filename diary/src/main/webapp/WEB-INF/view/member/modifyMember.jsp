@@ -15,7 +15,7 @@
 		<h1>PW변경</h1>
 
 	<form method="post" id="modifyMemberAct"
-	action="${contextPath}/modifyMember">
+	action="${contextPath}/member/modifyMember">
 		<input type="hidden" value="${loginMember.memberNo}">
 		<table class="table">
 			<tr>
@@ -40,6 +40,7 @@
 			</tr>
 		</table>
 		<button id="modifyMemberBtn" class="btn btn-outline-info" type="button">변경하기</button>
+		<a href="${contextPath}/member/removeMember" class="btn btn-outline-danger">계정탈퇴</a>
 	</form>
 </div>
 </body>

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<form method="post" action="${contextPath}/addMember"
+	<form method="post" action="${contextPath}/member/addMember"
 		class="addMemberAct">
 		
 		<table>
@@ -32,7 +32,7 @@
 			<tr>
 				<td></td>
 				<td colspan="2">
-					<a href="${contextPath}/login"><button type="button" class="btn btn-outline-info">뒤로가기</button></a>
+					<a href="${contextPath}/member/login" class="btn btn-outline-info">뒤로가기</a>
 					<button type="button" class="addMemberBtn btn btn-outline-info">가입하기</button>
 				</td>
 			</tr>

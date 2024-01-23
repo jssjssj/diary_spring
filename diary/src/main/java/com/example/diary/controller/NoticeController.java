@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.diary.service.CommentService;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/notice")
 public class NoticeController {
 	@Autowired 
 	private NoticeService noticeService;
@@ -82,7 +84,7 @@ public class NoticeController {
 
 		List<Comment> commentList = commentService.selectCommentList(commentMap);
 	
-		model.addAttribute("commentList", commentList); // 맵 삽입 후 결과값확인 디버깅 및 페이지로 전달
+		model.addAttribute("commentList", commentList); 
 
 		int totalRow = commentService.commentCount();
 		int lastPage = (totalRow / rowPerPage);
@@ -157,6 +159,6 @@ public class NoticeController {
 		
 		notice.setMemberId(loginMember.getMemberId());
 		noticeService.updateNotice(notice);
-		return "redirect:/noticeList";
+		return "redirect:/notice/noticeList";
 	}
 }

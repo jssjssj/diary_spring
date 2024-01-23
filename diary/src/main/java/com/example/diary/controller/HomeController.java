@@ -28,12 +28,8 @@ public class HomeController {
 	@GetMapping("/home")
 	public String home(HttpSession session, Model model, @RequestParam(required = false) Integer targetYear,
 			@RequestParam(required = false) Integer targetMonth) {
-		// 로그인 후에만
-		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/login";
-		}
+		
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		session.setAttribute("loginMember", loginMember); // 로그인 정보 및 세션 세팅 완
 				
 		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth, session, loginMember.getMemberId());
 		model.addAttribute("calendarMap", calendarMap);
@@ -48,7 +44,9 @@ public class HomeController {
 
 		List<Map<String, Object>> scheduleList = scheduleService.getScheduleListByMonth(paramMap);
 		
-		model.addAttribute("scheduleList", scheduleList); // 일자별 스케쥴 개 수 , 스케쥴메모 앞 5글자 미리보기 완		
+		model.addAttribute("scheduleList", scheduleList); // 일자별 스케쥴 개 수 출력
+		log.info(scheduleList.isEmpty() ? "출력 완" : "스케쥴 없음");
+		
 		
 		return "home";
 	}

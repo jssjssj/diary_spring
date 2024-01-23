@@ -21,7 +21,7 @@
 	<br>
 	<br>
 	
-	<form method="post" action="${contextPath}/removeComment"
+	<form method="post" action="${contextPath}/comment/removeComment"
 		class="removeCommentAct">
 
 		<div>

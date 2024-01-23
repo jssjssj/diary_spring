@@ -7,16 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span>
-		<a href="./logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
-		<a href="./modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button>	</a>
-		<%-- <!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 --><a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}">
-			<button type="button">회원탈퇴</button></a> --%>
-	</span>
-			
-	<span class="right">
-		<a href="./home"><button class="btn btn-outline-info" type="button">Home</button></a>
-		<a href="./noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
-	</span>
+<div class="row">
+	<div class="col-md-4">
+		<span>
+			<a href="/member/logout" class="btn btn-outline-info">로그아웃</a>
+			<a href="/member/modifyMember" class="btn btn-outline-info">정보수정</a>
+		</span>
+	</div>
+	<div class="col-md-6"></div>
+	<div class="col-md-2">
+		<span class="right">
+			<a href="/home" class="btn btn-outline-info">Home</a>
+			<a href="/notice/noticeList" class="btn btn-outline-info">공지사항</a>
+		</span>
+	</div>
+</div>
 </body>
 </html>

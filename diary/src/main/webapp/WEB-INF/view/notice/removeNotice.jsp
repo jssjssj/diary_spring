@@ -15,7 +15,7 @@
 	
 	<div class="center">	
 	<br>
-	<form action="${contextPath}/removeNotice" method="post"
+	<form action="${contextPath}/notice/removeNotice" method="post"
 		class="removeNoticeAct">
 		<div class="menubar">
 		<br>
