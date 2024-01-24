@@ -14,12 +14,12 @@
 		<table class="table table-border">
 			<tr>
 				<td>ID</td>
-				<td><input type="text" name="memberId" class="memberId"></td>
+				<td><input type="text" name="memberId" class="memberId" value="test" placeholder="아이디"></td>
 			</tr>
 
 			<tr>
 				<td>PW</td>
-				<td><input type="password" name="memberPw" class="memberPw"></td>
+				<td><input type="password" name="memberPw" class="memberPw" value="1234" placeholder="비밀번호"></td>
 			</tr>	
 			<tr>
 				<td></td>

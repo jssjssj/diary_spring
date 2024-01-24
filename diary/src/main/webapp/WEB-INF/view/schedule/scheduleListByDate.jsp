@@ -92,23 +92,15 @@
 	</c:if>
 	
 	<!-- 페이징 버튼 -->
-		<div class="center">
-	<c:if test="${resultMap.currentPage != 1}">
-		<a
-			href="${contextPath}/schedule/scheduleListByDate?currentPage=1&year=${year}&month=${month}&day=${day}" class="btn btn-primary">맨앞</a>
-		<a
-			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.currentPage-1}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">이전</a>
-	</c:if>
-
-	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
-		<a
-			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.currentPage+1}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">다음</a>
-		<a
-			href="${contextPath}/schedule/scheduleListByDate?currentPage=${resultMap.lastPage}&year=${year}&month=${month}&day=${day}" class="btn btn-primary">맨뒤</a>
-	</c:if>
-		</div>
-
-	
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/schedule/scheduleListByDate?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/schedule/scheduleListByDate?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 </body>
 
 <script>

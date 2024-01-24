@@ -16,14 +16,15 @@
 
 	<div class="menubar">
 		<div class="center">
-		<br><br>
-				<h1>Home</h1>
-			<div>ID : ${loginMember.memberId}</div>
+			<br>
+			<br>
+			<h3>Home</h3>
+			<h1><strong>ID ${loginMember.memberId}</strong></h1>
 		</div>
 
 		<form action="${contextPath}/schedule/scheduleListByDate" method="get"
 			class="selectAct">
-			
+
 			<select name="year" class="year">
 				<option value="">선택안함</option>
 				<c:if test="${maxMinMap.minYear!=null || maxMinMap.maxYear!=null}">
@@ -32,45 +33,45 @@
 						<option>${i}</option>
 					</c:forEach>
 				</c:if>
-			</select> 
-			
-			<select name="month" class="month">
+			</select> <select name="month" class="month">
 				<option value="">선택안함</option>
 				<c:forEach var="i" begin="1" end="12" step="1">
 					<option>${i}</option>
 				</c:forEach>
-			</select> 
-			
-			<select name="day" class="day">
+			</select> <select name="day" class="day">
 				<option value="">선택안함</option>
 				<c:forEach var="i" begin="1" end="31" step="1">
 					<option>${i}</option>
 				</c:forEach>
 			</select>
-			
-			<button type="button" class="selectBtn">🍳</button>
+
+			<button type="button" class="selectBtn btn btn-outline-info">🍳</button>
 		</form>
 
 		<form action="${contextPath}/schedule/scheduleListByWord" method="get">
 			<input type="text" name="word" class="word">
-			<button type="submit">🍳</button>
+			<button type="submit" class="btn btn-outline-info">🍳</button>
 		</form>
 	</div>
 
 
-		<br>
-	
-	
+	<br>
+
+
 	<!-- 캘린더 Month controller -->
-<div class="center">
-	<div class="btn-group btn-group-lg">
-		<a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}" class="btn btn-outline-info">◀</a> &nbsp;
-		<h3 class="center">${calendarMap.targetYear}년
-			${calendarMap.targetMonth + 1}월</h3>
-		&nbsp; <a href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"  class="btn btn-outline-info">▶</a>
+	<div class="center">
+		<div class="btn-group btn-group-lg">
+			<a
+				href="${contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}"
+				class="btn btn-default">◀</a> &nbsp;
+			<h3 class="center">${calendarMap.targetYear}년
+				${calendarMap.targetMonth + 1}월</h3>
+			&nbsp; <a
+				href="${contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}"
+				class="btn btn-default">▶</a>
 		</div>
 	</div>
-	
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -83,44 +84,46 @@
 				<th style="color: DodgerBlue;">토</th>
 			</tr>
 		</thead>
-		<tr>
 
+		<tr>
 			<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
 
 				<c:set var="d" value="${i-calendarMap.beginBlank}" />
 
 				<td><c:if test="${d < 1 || d> calendarMap.lastDate}"> &nbsp; </c:if>
 					<c:if test="${!(d < 1 || d> calendarMap.lastDate)}">
-					<span style="font-size: 30px;">${d}</span>
-				<c:forEach var="s" items="${scheduleList}">
+						<span style="font-size: 30px;">${d}</span>
+						<c:forEach var="s" items="${scheduleList}">
 							<c:if test="${d == s.day}">
 								<div>일정 ${s.cnt}개</div>
 								<%-- ${s.memo} // 메모 미리보기 : 가독성문제로 보류  --%>
 							</c:if>
+
 						</c:forEach>
 						<div>
 							<a
 								href="${contextPath}/schedule/scheduleOneByDay?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
-								<button type="button" style="background-color:#ebfafa; border-color:#ebfafa;">조회</button>
+								<button type="button"
+									style="background-color: #ebfafa; border-color: #ebfafa;">조회</button>
 							</a>
 						</div>
 
-					</c:if> <!-- 한 행 당 7열 --> <c:if test="${i<calendarMap.totalTd && i%7==0}">
-		</tr>
-		<tr>
-			</c:if>
-			</td>
+					</c:if> 
+					
+					<!-- 한 행 당 7열 --> 
+					<c:if test="${i<calendarMap.totalTd && i%7==0}"></tr><tr></c:if>	
+		</td>
 
-			</c:forEach>
+		</c:forEach>
 
 		</tr>
 
 	</table>
 
-<br>
-<br>
-<br>
-<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
 </body>
 <script>
@@ -149,6 +152,5 @@
 							$('.selectAct').submit();
 						}
 					});
-
 </script>
 </html>

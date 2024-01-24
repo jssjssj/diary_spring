@@ -6,7 +6,7 @@
 			SELECT 
 				day(SCHEDULE_date) AS day, 
 				COUNT(*) AS cnt
-		FROM SCHEDULE
+		FROM schedule
 		WHERE member_id = #{memberId}
 		AND YEAR(schedule_date) = #{targetYear}
 		AND MONTH(schedule_date) = #{targetMonth} +1

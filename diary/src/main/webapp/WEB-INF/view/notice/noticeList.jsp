@@ -50,15 +50,17 @@
 			</tbody>
 		</c:forEach>
 	</table>
-	<c:if test="${currentPage!=1}">
-		<a href="${contextPath}/notice/noticeList?currentPage=1"><button type="button">처음</button></a>		
-		<a href="${contextPath}/notice/noticeList?currentPage=${currentPage-1}"><button type="button">이전</button></a>
-	</c:if>	
-		
-	<c:if test="${currentPage!=lastPage}">
-		<a href="${contextPath}/notice/noticeList?currentPage=${currentPage+1}"><button type="button">다음</button></a>	
-		<a href="${contextPath}/notice/noticeList?currentPage=${lastPage}"><button type="button">마지막</button></a>	
-	</c:if>	
+	
+	<!-- 페이징 버튼 -->
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/notice/noticeList?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/notice/noticeList?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 	
 </body>
 </html>

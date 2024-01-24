@@ -30,11 +30,8 @@ public class MemberController {
 	private ScheduleService scheduleService;
 	
 	@GetMapping("/login")
-	public String login(HttpSession session) {
-		// 로그인 전에만
-		if (session.getAttribute("loginMember") != null) {
-			return "redirect:/home";
-		}
+	public String login() {
+		
 		return "member/login";
 	}
 
@@ -45,8 +42,11 @@ public class MemberController {
 		if(memberService.login(paramMember) != null) {
 			Member loginMember = memberService.login(paramMember);
 			session.setAttribute("loginMember", loginMember);
+			return "redirect:/home";	
+		} else {
+			return "login";
 		}
-			return "redirect:/home";			
+				
 	}
 
 	@GetMapping("/logout")
@@ -70,64 +70,47 @@ public class MemberController {
 	}
 	
 	@GetMapping("/removeMember")
-	public String removeMember(Model model, Member member, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
-		
+	public String removeMember(Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("loginMember");
 		model.addAttribute("member", member);
 		return "member/removeMember";
 	}
 	
 	@PostMapping("/removeMember")
-	public String removeMember(Member member, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		Member paramMember = new Member();
-		paramMember.setMemberId(loginMember.getMemberId());
-		paramMember.setMemberPw(member.getMemberPw());
+	public String removeMember(Member member) {
 
-		Member removeMember = memberService.login(paramMember);
+		Member removeMember = memberService.login(member);
 		
 		if (removeMember != null) {
-			// todo: commentDelete, noticeDelete, scheduleDelete
-			memberService.removeMember(loginMember);
+			// To do: commentDelete, noticeDelete, scheduleDelete
+			memberService.removeMember(member);
 			return "member/login";
 		} else {
-			return "redirect:/removeMember";
+			return "redirect:removeMember";
 		}
 	}
 	
 	@GetMapping("/modifyMember")
 	public String modifyMember(Model model, Member member, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
 		model.addAttribute("loginMember", loginMember);
 		return "member/modifyMember";
 	}
 	
 	@PostMapping("/modifyMember")
-	public String modifyMember(Member member, HttpSession session, String memberNewPw) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
+	public String modifyMember(Member member, String memberNewPw) {
 		
 		// 현재PW 일치여부 확인위해 객체설정 및 대입 -> checkMember가 존재해야 정보수정 가능
-		Member paramMember = new Member();
-		paramMember.setMemberId(loginMember.getMemberId());
-		paramMember.setMemberPw(member.getMemberPw());
 
-		Member checkMember = memberService.login(paramMember);
+		Member checkMember = memberService.login(member);
 		
 		if (checkMember != null) {
-			Member modifyMember = new Member();
-			modifyMember.setMemberNo(loginMember.getMemberNo());
-			modifyMember.setMemberPw(memberNewPw);
+			checkMember.setMemberPw(memberNewPw);
 		
-			memberService.modifyMember(modifyMember);
+			memberService.modifyMember(checkMember);
 			return "member/login";
 		} else {
-			return "redirect:/modifyMember";
+			return "redirect:modifyMember";
 		}
 	}
 	

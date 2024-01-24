@@ -14,8 +14,18 @@
 
 	<form action="${contextPath}/member/removeMember" method="post"
 		id="removeMemberAct">
-			<div>탈퇴를 위해 PW를 입력하세요</div>
-			<div><input type="password" name="memberPw" id="memberPw" placeholder="PW입력"></div>
+		탈퇴를 위해 PW를 입력하세요
+		<table>
+			<tr>
+				<td>ID</td>
+				<td><input readonly="readonly" value="${ member.memberId }" name="memberId"></td>
+			</tr>
+			
+			<tr>
+				<td>PW</td>
+				<td><input type="password" name="memberPw" id="memberPw" placeholder="PW입력"></td>
+			</tr>
+		</table>
 		<button type="button" class="btn btn-outline-danger" id="removeMemberBtn">탈퇴하기</button>
 	</form>
 

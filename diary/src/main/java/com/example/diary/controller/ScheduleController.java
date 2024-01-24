@@ -123,6 +123,8 @@ public class ScheduleController {
 				loginMember.getMemberId());
 		model.addAttribute("resultMap", resultMap);
 		model.addAttribute("loginMember", loginMember);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", resultMap.get("lastPage"));
 
 		return "schedule/scheduleListByWord";
 	}
@@ -147,6 +149,8 @@ public class ScheduleController {
 		model.addAttribute("month", month);
 		model.addAttribute("day", day);
 		model.addAttribute("loginMember", loginMember);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", resultMap.get("lastPage"));
 
 		return "schedule/scheduleListByDate";
 	}

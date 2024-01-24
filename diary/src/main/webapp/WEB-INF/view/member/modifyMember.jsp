@@ -21,7 +21,7 @@
 			<tr>
 				<td>Id</td>
 				<td><input type="text" readonly="readonly"
-					value="${loginMember.memberId}"></td>
+					value="${loginMember.memberId}" name="memberId"></td>
 			</tr>
 
 			<tr>

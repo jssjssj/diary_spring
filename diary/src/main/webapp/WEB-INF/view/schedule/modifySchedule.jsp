@@ -23,12 +23,20 @@
 		<table>
 			<tr>
 				<th>메모</th>
-				<!-- <th>이모지</th> -->
+				
+				<td>&nbsp;&nbsp;<textarea name="scheduleMemo" class="scheduleMemo" rows="10" cols="160" style="resize: none;">${schedule.scheduleMemo}</textarea></td>
 				
 			</tr>
 			<tr>
-				<th><textarea name="scheduleMemo" class="scheduleMemo" rows="10" cols="160" style="resize: none;">${schedule.scheduleMemo}</textarea></th>			
-				<%-- <td><input type="" name="scheduleEmoji" value="${schedule.scheduleEmoji}" class="scheduleEmoji"></td> --%>
+				<th>&#128578;</th>			
+				<td colspan="6">
+					<input type="radio" name="scheduleEmoji" id="emogi0" checked="checked"/><label for="emogi0">X</label>        
+					<input type="radio" name="scheduleEmoji" id="emogi1" value="&#127754;"/><label for="emogi1">&#127754;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi2" value="&#127752;"/><label for="emogi2">&#127752;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi3" value="&#127936;"/><label for="emogi3">&#127936;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi4" value="&#128151;"/><label for="emogi4">&#128151;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi5" value="&#128172;"/><label for="emogi5">&#128172;</label>&nbsp;&nbsp;	
+				</td>
 			</tr>
 		</table>
 		<button type="button" class="btn btn-outline-info , modifyScheduleBtn">수정하기</button>

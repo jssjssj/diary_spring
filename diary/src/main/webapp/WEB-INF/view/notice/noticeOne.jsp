@@ -22,6 +22,7 @@
 			<a class="btn btn-outline-info" href="${contextPath}/notice/modifyNotice?noticeNo=${notice.noticeNo}">수정</a>
 		</div>
 	</c:if>
+		<br>
 
 	<table class="table">
 		<tr>
@@ -142,15 +143,15 @@
 	</table>
 
 	<!-- 페이징 버튼 -->
-			<c:if test="${currentPage!=1}">
-				<a href="${contextPath}/notice/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}">맨앞</a>
-				<a href="${contextPath}/notice/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}">이전</a>
-			</c:if>
-			
-			<c:if test="${currentPage!=lastPage}">
-				<a href="${contextPath}/notice/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}">다음</a>
-				<a href="${contextPath}/notice/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}">맨뒤</a>
-			</c:if>
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 	<br>
 	<br>
 	<br>

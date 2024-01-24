@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.diary.service.CommentService;
 import com.example.diary.vo.Comment;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,7 +22,7 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@PostMapping("/addComment")
-	public String addCommentList(Comment comment, HttpSession session) {
+	public String addCommentList(Comment comment) {
 		if (comment.getIsSecret() == null) {
 			comment.setIsSecret("N");
 		} else {
@@ -37,7 +36,7 @@ public class CommentController {
 	}
 	
 	@GetMapping("/removeComment_manager")
-	public String removeComment_manager(Comment comment, HttpSession session) {
+	public String removeComment_manager(Comment comment) {
 		commentService.deleteComment_manager(comment);
 		String url = "redirect:/notice/noticeOne?noticeNo=" + comment.getNoticeNo();
 		return url;

@@ -48,19 +48,16 @@
 		</div>
 	</c:if>
 	
-	<!-- 페이징버튼 -->	
-		<div class="center">
-	<c:if test="${resultMap.currentPage != 1}">
-		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=1&word=${resultMap.word}" class="btn btn-primary">맨앞</a>
-		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.currentPage-1}&word=${resultMap.word}" class="btn btn-primary">이전</a>
-	</c:if>
-	
-	<c:if test="${resultMap.currentPage != resultMap.lastPage}">
-		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.currentPage+1}&word=${resultMap.word}" class="btn btn-primary">다음</a>
-		<a href="${contextPath}/schedule/scheduleListByWord?currentPage=${resultMap.lastPage}&word=${resultMap.word}" class="btn btn-primary">맨뒤</a>
-	</c:if>
-		</div>
-		
+	<!-- 페이징 버튼 -->
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/schedule/scheduleListByWord?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/schedule/scheduleListByWord?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 
 </body>
 </html>
