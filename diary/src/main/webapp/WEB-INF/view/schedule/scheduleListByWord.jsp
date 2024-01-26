@@ -25,7 +25,7 @@
 	<br>
 		<div class="center">
 	<form action="${contextPath}/schedule/scheduleListByWord" method="get">
-		<input type="text" name="word">
+		<input type="text" name="word" placeholder="메모검색">
 		<button type="submit">🍳</button>
 	</form>
 		</div>

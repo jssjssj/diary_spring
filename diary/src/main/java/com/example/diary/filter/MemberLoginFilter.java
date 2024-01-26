@@ -10,6 +10,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class MemberLoginFilter implements Filter {
        
@@ -23,9 +24,16 @@ public class MemberLoginFilter implements Filter {
 			throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpSession session = request.getSession();
+        boolean isLogin = session.getAttribute("loginMember") != null;
+        boolean isLoginPath1 = request.getServletPath().equals("/member/login");
+        @SuppressWarnings("unlikely-arg-type")
+		boolean isLoginPath2= request.getServletContext().equals("/member/addMember");
+        if(!isLogin && !(isLoginPath1 || isLoginPath2)) {
+            response.sendRedirect(request.getContextPath() + "/member/login"); // 로그인 페이지로 리다이렉트하는 예시
+            return;
+        }
         
-        boolean isLogin = request.getSession().getAttribute("loginMember") != null;
-        boolean isLoginPath = request.getServletPath().equals("/member/login");
         filterChain.doFilter(request, response);
 	}
 
@@ -35,4 +43,6 @@ public class MemberLoginFilter implements Filter {
 	}
 
 }
+
+
 

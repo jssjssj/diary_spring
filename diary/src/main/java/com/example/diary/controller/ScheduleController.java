@@ -31,9 +31,6 @@ public class ScheduleController {
 	public String scheduleByDay(Schedule schedule, HttpSession session, String scheduleDate, Integer targetYear,
 			Integer targetMonth, Integer targetDay, Model model) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "redirect:/login";
-		}
 		if (scheduleDate != null) {
 			targetYear = Integer.parseInt(scheduleDate.substring(0, 4));
 			targetMonth = Integer.parseInt(scheduleDate.substring(5, 7)) - 2;
@@ -83,10 +80,6 @@ public class ScheduleController {
 	@GetMapping("/modifySchedule")
 	public String modifyScheduleByDay(Schedule schedule, HttpSession session, Integer targetYear, Integer targetMonth,
 			Integer targetDay, Model model) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "login";
-		}
 		model.addAttribute("targetYear", targetYear);
 		model.addAttribute("targetMonth", targetMonth);
 		model.addAttribute("targetDay", targetDay);
@@ -115,9 +108,6 @@ public class ScheduleController {
 			String scheduleDate, Model model, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage) {
 
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
 
 		Map<String, Object> resultMap = scheduleService.getScheduleListByWord(word, currentPage,
 				loginMember.getMemberId());
@@ -137,10 +127,7 @@ public class ScheduleController {
 			@RequestParam(defaultValue = "1") int currentPage, Model model) {
 
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
-
+		
 		Map<String, Object> resultMap = scheduleService.getScheduleListByDate(year, month, day, currentPage,
 				loginMember.getMemberId());
 		model.addAttribute("resultMap", resultMap);

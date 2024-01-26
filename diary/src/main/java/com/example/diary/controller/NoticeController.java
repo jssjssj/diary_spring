@@ -33,11 +33,6 @@ public class NoticeController {
 	@GetMapping(value = "/noticeList")
 	public String noticeList(Model model, HttpSession session, @RequestParam(defaultValue = "1") int currentPage) {
 
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
-
 		// noticeList 출력세팅
 		int rowPerPage = 10;
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -63,9 +58,7 @@ public class NoticeController {
 	public String noticeOne(Model model, Notice notice, HttpSession session,
 			@RequestParam(defaultValue = "1") int currentPage) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
+		
 		Notice paramNotice = noticeService.selectNoticeOne(notice);
 		
 		model.addAttribute("loginMember", loginMember);
@@ -100,11 +93,7 @@ public class NoticeController {
 	
 	// 공지추가
 	@GetMapping(value = "/addNotice")
-	public String addNotice(HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
+	public String addNotice(HttpSession session) {		
 		return "notice/addNotice";
 	}
 	
@@ -121,12 +110,7 @@ public class NoticeController {
 	// 공지삭제
 	@GetMapping(value = "/removeNotice")
 	public String removeNotice(Model model, Notice notice, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
-		model.addAttribute("notice", notice);
-	
+		model.addAttribute("notice", notice);	
 		return "notice/removeNotice";
 	}
 
@@ -143,13 +127,8 @@ public class NoticeController {
 	// 공지수정
 	@GetMapping(value = "/modifyNotice")
 	public String modifyNotice(HttpSession session, Model model, Notice notice) {
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "member/login";
-		}
 		Notice paramNotice = noticeService.selectNoticeOne(notice);
-		model.addAttribute("paramNotice", paramNotice);
-		
+		model.addAttribute("paramNotice", paramNotice);		
 		return "notice/modifyNotice";
 	}
 

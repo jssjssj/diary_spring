@@ -19,8 +19,9 @@
 			<br>
 			<br>
 			<h3>Home</h3>
-			<h1><strong>ID ${loginMember.memberId}</strong></h1>
+			<h1><strong>Login ID: ${loginMember.memberId}</strong></h1>
 		</div>
+			<br>
 
 		<form action="${contextPath}/schedule/scheduleListByDate" method="get"
 			class="selectAct">
@@ -49,7 +50,7 @@
 		</form>
 
 		<form action="${contextPath}/schedule/scheduleListByWord" method="get">
-			<input type="text" name="word" class="word">
+			<input type="text" name="word" class="word" placeholder="메모검색">
 			<button type="submit" class="btn btn-outline-info">🍳</button>
 		</form>
 	</div>
