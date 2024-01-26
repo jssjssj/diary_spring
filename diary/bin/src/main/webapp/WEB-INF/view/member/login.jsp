@@ -4,35 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- jQuary -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="${contextPath}/css/d1.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/view/inc/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div>
-	<form method="post" action="${contextPath}/login" class="loginAct">
+	<form method="post" action="${contextPath}/member/login" class="loginAct">
 		<table class="table table-border">
 			<tr>
 				<td>ID</td>
-				<td><input type="text" name="memberId" class="memberId"></td>
+				<td><input type="text" name="memberId" class="memberId" value="test" placeholder="아이디"></td>
 			</tr>
 
 			<tr>
 				<td>PW</td>
-				<td><input type="password" name="memberPw" class="memberPw"></td>
+				<td><input type="password" name="memberPw" class="memberPw" value="1234" placeholder="비밀번호"></td>
 			</tr>	
 			<tr>
 				<td></td>
 				<td colspan="2">
 					<button type="button" class="loginBtn btn btn-outline-info">로그인</button>
-					<a href="${contextPath}/addMember"><button type="button" class="btn btn-outline-info">회원가입</button></a>		
+					<a href="${contextPath}/member/addMember" class="btn btn-outline-info">회원가입</a>		
 				</td>
 			</tr>		
 		</table>

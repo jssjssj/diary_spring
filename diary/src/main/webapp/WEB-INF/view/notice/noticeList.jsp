@@ -21,33 +21,34 @@
 			<br>
 	</c:if>
 	<table class="table">
-		<tr>
-			<th>공지번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>등록일</th>
-			<c:if test="${loginMember.memberLevel == 1}">
-				<th>수정/삭제</th>
-			</c:if>
-		</tr>
-
+		<thead>
+			<tr>
+				<th>공지번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<c:if test="${loginMember.memberLevel == 1}">
+					<th>수정/삭제</th>
+				</c:if>
+			</tr>
+		</thead>
 		<c:forEach var="n" items="${list}">
-			<tbody>
-				<tr>
-					<td>${n.noticeNo}</td>
-					<td><a href="${contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-					<td>
-						<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
-						<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
-					</td>
-					<td>${n.createdate}</td>
-					<c:if test="${loginMember.memberLevel == 1}">
-						<td colspan="2"><a class="btn btn-outline-info"
-							href="${contextPath}/notice/modifyNotice?noticeNo=${n.noticeNo}">수정</a> <a class="btn btn-outline-info"
-							href="${contextPath}/notice/removeNotice?noticeNo=${n.noticeNo}">삭제</a></td>
-					</c:if>
-				</tr>
-			</tbody>
+		<tbody>
+			<tr>
+				<td>${n.noticeNo}</td>
+				<td><a href="${contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
+				<td>
+					<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
+					<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
+				</td>
+				<td>${n.createdate}</td>
+				<c:if test="${loginMember.memberLevel == 1}">
+					<td colspan="2"><a class="btn btn-outline-info"
+						href="${contextPath}/notice/modifyNotice?noticeNo=${n.noticeNo}">수정</a> <a class="btn btn-outline-info"
+						href="${contextPath}/notice/removeNotice?noticeNo=${n.noticeNo}">삭제</a></td>
+				</c:if>
+			</tr>
+		</tbody>
 		</c:forEach>
 	</table>
 	

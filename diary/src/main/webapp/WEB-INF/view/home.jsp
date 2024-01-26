@@ -30,18 +30,18 @@
 				<c:if test="${maxMinMap.minYear!=null || maxMinMap.maxYear!=null}">
 					<c:forEach var="i" begin="${maxMinMap.minYear}"
 						end="${maxMinMap.maxYear}" step="1">
-						<option>${i}</option>
+						<option value="${i}">${i}년</option>
 					</c:forEach>
 				</c:if>
 			</select> <select name="month" class="month">
 				<option value="">선택안함</option>
 				<c:forEach var="i" begin="1" end="12" step="1">
-					<option>${i}</option>
+					<option value="${i}">${i}월</option>
 				</c:forEach>
 			</select> <select name="day" class="day">
 				<option value="">선택안함</option>
 				<c:forEach var="i" begin="1" end="31" step="1">
-					<option>${i}</option>
+					<option value="${i}">${i}일</option>
 				</c:forEach>
 			</select>
 
@@ -84,40 +84,40 @@
 				<th style="color: DodgerBlue;">토</th>
 			</tr>
 		</thead>
-
-		<tr>
-			<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
-
-				<c:set var="d" value="${i-calendarMap.beginBlank}" />
-
-				<td><c:if test="${d < 1 || d> calendarMap.lastDate}"> &nbsp; </c:if>
-					<c:if test="${!(d < 1 || d> calendarMap.lastDate)}">
-						<span style="font-size: 30px;">${d}</span>
-						<c:forEach var="s" items="${scheduleList}">
-							<c:if test="${d == s.day}">
-								<div>일정 ${s.cnt}개</div>
-								<%-- ${s.memo} // 메모 미리보기 : 가독성문제로 보류  --%>
-							</c:if>
-
-						</c:forEach>
-						<div>
-							<a
-								href="${contextPath}/schedule/scheduleOneByDay?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
-								<button type="button"
-									style="background-color: #ebfafa; border-color: #ebfafa;">조회</button>
-							</a>
-						</div>
-
-					</c:if> 
-					
-					<!-- 한 행 당 7열 --> 
-					<c:if test="${i<calendarMap.totalTd && i%7==0}"></tr><tr></c:if>	
-		</td>
-
-		</c:forEach>
-
-		</tr>
-
+		<tbody>
+			<tr>
+				<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
+	
+					<c:set var="d" value="${i-calendarMap.beginBlank}" />
+	
+					<td><c:if test="${d < 1 || d> calendarMap.lastDate}"> &nbsp; </c:if>
+						<c:if test="${!(d < 1 || d> calendarMap.lastDate)}">
+							<span style="font-size: 30px;">${d}</span>
+							<c:forEach var="s" items="${scheduleList}">
+								<c:if test="${d == s.day}">
+									<div>일정 ${s.cnt}개</div>
+									<%-- ${s.memo} // 메모 미리보기 : 가독성문제로 보류  --%>
+								</c:if>
+	
+							</c:forEach>
+							<div>
+								<a
+									href="${contextPath}/schedule/scheduleOneByDay?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}&targetDay=${d}">
+									<button type="button"
+										style="background-color: #ebfafa; border-color: #ebfafa;">조회</button>
+								</a>
+							</div>
+	
+						</c:if> 
+						
+						<!-- 한 행 당 7열 --> 
+						<c:if test="${i<calendarMap.totalTd && i%7==0}"></tr><tr></c:if>	
+			</td>
+	
+			</c:forEach>
+	
+			</tr>
+		</tbody>
 	</table>
 
 	<br>

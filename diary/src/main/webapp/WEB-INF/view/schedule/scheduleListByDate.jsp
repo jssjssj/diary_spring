@@ -42,39 +42,42 @@
 			<option value="">선택안함</option>
 			<c:forEach var="i" begin="${resultMap.maxMinMap.minYear}"
 				end="${resultMap.maxMinMap.maxYear}" step="1">
-				<option>${i}</option>
+				<option value="${i}">${i}년</option>
 			</c:forEach>
 		</select> <select name="month" class="month">
 			<option value="">선택안함</option>
 			<c:forEach var="i" begin="1" end="12" step="1">
-				<option>${i}</option>
+				<option value="${i}">${i}월</option>
 			</c:forEach>
 		</select> <select name="day" class="day">
 			<option value="">선택안함</option>
 			<c:forEach var="i" begin="1" end="31" step="1">
-				<option>${i}</option>
+				<option value="${i}">${i}일</option>
 			</c:forEach>
 		</select>
 		<button type="button" class="selectBtn">🍳</button>
 	</form>
 
-	
+	<br>
 
 
 	<c:if test="${resultMap.list.size() != 0}">
 		<div>
 			<table class="table table-hover">
-				<tr>
-					<td>메모</td>
-					<td>일정일자</td>
-				</tr>
-
+				<thead>
+					<tr>
+						<th>메모</th>
+						<th>일정일자</th>
+					</tr>
+				</thead>
 				<c:forEach var="list" items="${resultMap.list}">
+				<tbody>
 					<tr>
 						<td>${list.scheduleMemo}</td>
 						<td><a
 							href="${contextPath}/schedule/scheduleOneByDay?scheduleDate=${list.scheduleDate}">${list.scheduleDate}</a></td>
 					</tr>
+				</tbody>
 				</c:forEach>
 
 			</table>

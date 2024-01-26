@@ -4,40 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="${contextPath}/css/d1.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/view/inc/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<span>
-		<a href="${contextPath}/logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
-		<a href="${contextPath}/modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button>	</a>
-		<%-- <!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 --><a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}">
-			<button type="button">회원탈퇴</button></a> --%>
-	</span>
-			
-	<span class="right">
-		<a href="${contextPath}/home"><button class="btn btn-outline-info" type="button">Home</button></a>
-		<a href="${contextPath}/noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
-	</span>
+	<jsp:include page="/WEB-INF/view/inc/menubar.jsp"></jsp:include>
+	
 	<div class="center">
 	<h1>공지사항</h1>
 	</div>
 	<c:if test="${loginMember.memberLevel == 1}">
 			<div class="center">
-		<a href="${pageContext.request.contextPath}/addNotice"><button class="btn btn-outline-info"
-				type="button">공지추가</button></a>
+		<a href="${pageContext.request.contextPath}/notice/addNotice" class="btn btn-outline-info">공지추가</a>
 			</div>
 			<br>
 	</c:if>
-	<table>
+	<table class="table">
 		<tr>
 			<th>공지번호</th>
 			<th>제목</th>
+			<th>작성자</th>
 			<th>등록일</th>
 			<c:if test="${loginMember.memberLevel == 1}">
 				<th>수정/삭제</th>
@@ -45,29 +32,35 @@
 		</tr>
 
 		<c:forEach var="n" items="${list}">
-			<tr>
-				<td>${n.noticeNo}</td>
-				<td><a href="${contextPath}/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-				<td>${n.createdate}</td>
-				<c:if test="${loginMember.memberLevel == 1}">
-					<td colspan="2"><a
-						href="${contextPath}/modifyNotice?noticeNo=${n.noticeNo}"><button class="btn btn-outline-info"
-								type="button">수정</button></a> <a
-						href="${contextPath}/removeNotice?noticeNo=${n.noticeNo}"><button class="btn btn-outline-info"
-								type="button">삭제</button></a></td>
-				</c:if>
-			</tr>
+			<tbody>
+				<tr>
+					<td>${n.noticeNo}</td>
+					<td><a href="${contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
+					<td>
+						<c:if test="${ loginMember.memberLevel == 1 }">${ n.memberId }</c:if>
+						<c:if test="${ loginMember.memberLevel == 0 }">관리자</c:if>
+					</td>
+					<td>${n.createdate}</td>
+					<c:if test="${loginMember.memberLevel == 1}">
+						<td colspan="2"><a class="btn btn-outline-info"
+							href="${contextPath}/notice/modifyNotice?noticeNo=${n.noticeNo}">수정</a> <a class="btn btn-outline-info"
+							href="${contextPath}/notice/removeNotice?noticeNo=${n.noticeNo}">삭제</a></td>
+					</c:if>
+				</tr>
+			</tbody>
 		</c:forEach>
 	</table>
-	<c:if test="${currentPage!=1}">
-		<a href="${contextPath}/noticeList?currentPage=1"><button type="button">처음</button></a>		
-		<a href="${contextPath}/noticeList?currentPage=${currentPage-1}"><button type="button">이전</button></a>
-	</c:if>	
-		
-	<c:if test="${currentPage!=lastPage}">
-		<a href="${contextPath}/noticeList?currentPage=${currentPage+1}"><button type="button">다음</button></a>	
-		<a href="${contextPath}/noticeList?currentPage=${lastPage}"><button type="button">마지막</button></a>	
-	</c:if>	
+	
+	<!-- 페이징 버튼 -->
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/notice/noticeList?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/notice/noticeList?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 	
 </body>
 </html>

@@ -32,17 +32,20 @@
 	<c:if test="${resultMap.list.size()!=0}">
 		<div>
 			<table class="table table-hover">
-				<tr>
-					<th>메모</th>
-					<th>일정일자</th>
-				</tr>
-
+				<thead>
+					<tr>
+						<th>메모</th>
+						<th>일정일자</th>
+					</tr>
+				</thead>
 				<c:forEach var="s" items="${resultMap.list}">
+				<tbody>
 					<tr>
 						<td>${s.scheduleMemo}</td>
 						<td><a
 							href="${contextPath}/schedule/scheduleOneByDay?scheduleDate=${s.scheduleDate}">${s.scheduleDate}</a></td>
 					</tr>
+				</tbody>
 				</c:forEach>
 			</table>
 		</div>

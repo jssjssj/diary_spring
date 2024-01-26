@@ -4,45 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- jQuary -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="${contextPath}/css/d1.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/view/inc/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
-	<span>
-		<a href="${contextPath}/logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
-		<a href="${contextPath}/modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button>	</a>
-		<%-- <!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 --><a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}">
-			<button type="button">회원탈퇴</button></a> --%>
-	</span>
-			
-	<span class="right">
-		<a href="${contextPath}/home"><button class="btn btn-outline-info" type="button">Home</button></a>
-		<a href="${contextPath}/noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
-	</span>
+	<jsp:include page="/WEB-INF/view/inc/menubar.jsp"></jsp:include>
 
 	<div class="center , menubar">
 			<br> 
 			<br>
-		<h2>공지상세</h2>
-			<br>
-	</div>
-			<br>
+		<h2>공지상세</h2>			
+	</div>			
 
 	<c:if test="${loginMember.memberLevel==1}">
 		<div class="center">
-			<a href="${contextPath}/modifyNotice?noticeNo=${notice.noticeNo}"><button
-					class="btn btn-outline-info" type="button">수정</button></a>
+			<a class="btn btn-outline-info" href="${contextPath}/notice/modifyNotice?noticeNo=${notice.noticeNo}">수정</a>
 		</div>
 	</c:if>
+		<br>
 
 	<table class="table">
 		<tr>
@@ -57,7 +37,7 @@
 
 		<tr>
 			<td>내용</td>
-			<td><textarea rows="60" readonly>${notice.noticeContent}</textarea></td>
+			<td><textarea rows="40" cols="120" readonly>${notice.noticeContent}</textarea></td>
 		</tr>
 
 		<tr>
@@ -71,7 +51,7 @@
 		<br>
 	</div>
 	<div class="center">
-		<form method="post" action="${contextPath}/addComment"
+		<form method="post" action="${contextPath}/comment/addComment"
 			id="addCommentAct">
 			<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
 			<input type="hidden" name="memberId" value="${loginMember.memberId}">
@@ -94,7 +74,7 @@
 				<tr>
 					<td>작성자</td>
 					<td>${loginMember.memberId}</td>
-					<td><input type="checkbox" name="isSecret" id="isSecret">비밀글</td>
+					<td><input type="checkbox" id="secret"><label for="secret">비밀글</label><input type="hidden" name="isSecret"></td>
 					<td><button class="btn btn-outline-info" type="submit"
 							id="addCommentBtn">등록</button></td>
 
@@ -106,7 +86,7 @@
 		<br>
 		<br>
 
-	<table class="center">
+	<table class="table table-sm">
 		<tr>
 			<th>작성자</th>
 			<th>댓글내용</th>			
@@ -147,17 +127,15 @@
 
 				<c:if test="${loginMember.memberLevel == 1}">
 					<!-- 관리자용 즉시삭제 -->
-					<td><a
-						href="${contextPath}/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}"><button
-								class="btn btn-outline-info" type="button">삭제</button></a></td>
+					<td><a class="btn btn-outline-info"
+						href="${contextPath}/comment/removeComment_manager?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}">삭제</a></td>
 				</c:if>
 
 				<c:if
 					test="${loginMember.memberLevel != 1 && loginMember.memberId == c.memberId}">
 					<!--회원용 삭제페이지 이동 -->
-					<td><a
-						href="${contextPath}/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}"><button
-								class="btn btn-outline-info" type="button">삭제</button></a></td>
+					<td><a class="btn btn-outline-info"
+						href="${contextPath}/comment/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}">삭제</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>
@@ -165,15 +143,15 @@
 	</table>
 
 	<!-- 페이징 버튼 -->
-			<c:if test="${currentPage!=1}">
-				<a href="${contextPath}/noticeOne?currentPage=1&noticeNo=${notice.noticeNo}"><button type="button">맨앞</button></a>
-				<a href="${contextPath}/noticeOne?currentPage=${currentPage-1}&noticeNo=${notice.noticeNo}"><button type="button">이전</button></a>
-			</c:if>
-			
-			<c:if test="${currentPage!=lastPage}">
-				<a href="${contextPath}/noticeOne?currentPage=${currentPage+1}&noticeNo=${notice.noticeNo}"><button type="button">다음</button></a>
-				<a href="${contextPath}/noticeOne?currentPage=${lastPage}&noticeNo=${notice.noticeNo}"><button type="button">맨뒤</button></a>
-			</c:if>
+	<div class="pagination justify-content-center">
+		<c:if test="${ currentPage > 1 }">
+			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage-1 }">이전</a>
+		</c:if>
+			<a class="page-link paging">${ currentPage }</a>
+		<c:if test="${ currentPage < lastPage }">
+			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage+1 }">다음</a>
+		</c:if>
+    </div>
 	<br>
 	<br>
 	<br>
@@ -183,7 +161,7 @@
 	<br>
 	<br>
 
-<!-- 하단바 추가전까지 임시 공간확보 -->
+
 	
 			
 </body>
@@ -201,11 +179,12 @@
 	 });
 	
 
- if($('#isSecret').change(function(){
-	 $('#isSecret').val('Y');
+ $('#secret').change(function(){
+	 if($('#secret').is(':checked')==true){
+		 $('#isSecret').val('Y');
+	 } else {
+		 $('#isSecret').val('N');
+	 }
  });
- ) else {
-	 $('#isSecret').val('N');
- }  
 </script>
 </html>

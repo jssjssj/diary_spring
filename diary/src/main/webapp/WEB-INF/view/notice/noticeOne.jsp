@@ -25,25 +25,27 @@
 		<br>
 
 	<table class="table">
-		<tr>
-			<td>공지번호</td>
-			<td>${notice.noticeNo}</td>
-		</tr>
-
-		<tr>
-			<td>제목</td>
-			<td>${notice.noticeTitle}</td>
-		</tr>
-
-		<tr>
-			<td>내용</td>
-			<td><textarea rows="40" cols="120" readonly>${notice.noticeContent}</textarea></td>
-		</tr>
-
-		<tr>
-			<td>작성일</td>
-			<td>${notice.createdate}</td>
-		</tr>
+		<tbody>
+			<tr>
+				<td>공지번호</td>
+				<td>${notice.noticeNo}</td>
+			</tr>
+	
+			<tr>
+				<td>제목</td>
+				<td>${notice.noticeTitle}</td>
+			</tr>
+	
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="40" cols="120" readonly>${notice.noticeContent}</textarea></td>
+			</tr>
+	
+			<tr>
+				<td>작성일</td>
+				<td>${notice.createdate}</td>
+			</tr>
+		</tbody>
 	</table>
 	<div class="menubar">
 		<br>
@@ -56,29 +58,31 @@
 			<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
 			<input type="hidden" name="memberId" value="${loginMember.memberId}">
 			<table class="table table-sm">
-				<tr>
-					<td>댓글내용</td>
-					<td><input type="text" name="commentContent"
-						id="commentContent"></td>
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>댓글PW</td>
-					<td><input type="password" name="commentPw" id="commentPw"></td>
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>작성자</td>
-					<td>${loginMember.memberId}</td>
-					<td><input type="checkbox" id="secret"><label for="secret">비밀글</label><input type="hidden" name="isSecret"></td>
-					<td><button class="btn btn-outline-info" type="submit"
-							id="addCommentBtn">등록</button></td>
-
-				</tr>
+				<tbody>
+					<tr>
+						<td>댓글내용</td>
+						<td><input type="text" name="commentContent"
+							id="commentContent"></td>
+						<td></td>
+						<td></td>
+					</tr>
+	
+					<tr>
+						<td>댓글PW</td>
+						<td><input type="password" name="commentPw" id="commentPw"></td>
+						<td></td>
+						<td></td>
+					</tr>
+	
+					<tr>
+						<td>작성자</td>
+						<td>${loginMember.memberId}</td>
+						<td><input type="checkbox" id="secret"><label for="secret">비밀글</label><input type="hidden" name="isSecret"></td>
+						<td><button class="btn btn-outline-info" type="submit"
+								id="addCommentBtn">등록</button></td>
+	
+					</tr>
+				</tbody>
 			</table>
 		</form>
 	</div>
@@ -87,14 +91,16 @@
 		<br>
 
 	<table class="table table-sm">
-		<tr>
-			<th>작성자</th>
-			<th>댓글내용</th>			
-			<th>삭제</th>
-	
-		</tr>
-
+		<thead>
+			<tr>
+				<th>작성자</th>
+				<th>댓글내용</th>			
+				<th>삭제</th>
+		
+			</tr>
+		</thead>
 		<c:forEach var="c" items="${commentList}">
+		<tbody>
 			<tr>
 				<c:if
 					test="${c.isSecret=='N' || c.memberId==loginMember.memberId || loginMember.memberLevel==1}">
@@ -117,7 +123,6 @@
 
 					</c:if>
 
-
 					<c:if
 						test="${!(loginMember.memberLevel == 1 || c.memberId==loginMember.memberId)}">
 						<td>비밀글 : 관리자만 확인가능</td>
@@ -138,8 +143,8 @@
 						href="${contextPath}/comment/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}">삭제</a></td>
 				</c:if>
 			</tr>
+		</tbody>
 		</c:forEach>
-
 	</table>
 
 	<!-- 페이징 버튼 -->

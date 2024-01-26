@@ -4,46 +4,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<jsp:include page="/WEB-INF/view/inc/header.jsp"></jsp:include>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<link href="${contextPath}/css/d1.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-	<span>
-		<a href="${contextPath}/logout"><button class="btn btn-outline-info" type="button">로그아웃</button></a>
-		<a href="${contextPath}/modifyMember"><button class="btn btn-outline-info" type="button">정보수정</button>	</a>
-		<%-- <!-- 회원탈퇴 - MariaDB 외래키 NO ACTION 설정 문제로 쿼리 등은 만들었으나 보류 --><a href="${pageContext.request.contextPath}/removeMember?memberNo=${loginMember.memberNo}">
-			<button type="button">회원탈퇴</button></a> --%>
-	</span>
-			
-	<span class="right">
-		<a href="${contextPath}/home"><button class="btn btn-outline-info" type="button">Home</button></a>
-		<a href="${contextPath}/noticeList"><button class="btn btn-outline-info" type="button">공지사항</button></a>
-	</span>
+	<jsp:include page="/WEB-INF/view/inc/menubar.jsp"></jsp:include>
 	
 	<form method="post"
-		action="${contextPath}/modifySchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"
+		action="${contextPath}/schedule/modifySchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}"
 		class="modifyScheduleAct">
 <br>
 	<div class="center">
-		<h2>${targetYear}-${targetMonth+2}-${targetDay}일정 수정</h2>
+		<h2>${targetYear}년 ${targetMonth}월 ${targetDay}일 일정 수정</h2>
 		<input type="hidden" name="scheduleNo" value="${schedule.scheduleNo}">
 	</div>	
 
 		<table>
 			<tr>
-				<th style="text-align: center">메모</th>
-				<!-- <th>이모지</th> -->
+				<th>메모</th>
+				
+				<td>&nbsp;&nbsp;<textarea name="scheduleMemo" class="scheduleMemo" rows="10" cols="160" style="resize: none;">${schedule.scheduleMemo}</textarea></td>
 				
 			</tr>
 			<tr>
-				<td><textarea name="scheduleMemo" class="scheduleMemo">${schedule.scheduleMemo}</textarea></td>			
-				<%-- <td><input type="" name="scheduleEmoji" value="${schedule.scheduleEmoji}" class="scheduleEmoji"></td> --%>
+				<th>&#128578;</th>			
+				<td colspan="6">
+					<input type="radio" name="scheduleEmoji" id="emogi0" checked="checked"/><label for="emogi0">X</label>        
+					<input type="radio" name="scheduleEmoji" id="emogi1" value="&#127754;"/><label for="emogi1">&#127754;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi2" value="&#127752;"/><label for="emogi2">&#127752;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi3" value="&#127936;"/><label for="emogi3">&#127936;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi4" value="&#128151;"/><label for="emogi4">&#128151;</label>&nbsp;&nbsp;
+					<input type="radio" name="scheduleEmoji" id="emogi5" value="&#128172;"/><label for="emogi5">&#128172;</label>&nbsp;&nbsp;	
+				</td>
 			</tr>
 		</table>
 		<button type="button" class="btn btn-outline-info , modifyScheduleBtn">수정하기</button>
