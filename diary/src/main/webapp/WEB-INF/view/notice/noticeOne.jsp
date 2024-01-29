@@ -142,6 +142,9 @@
 					<td><a class="btn btn-outline-info"
 						href="${contextPath}/comment/removeComment?commentNo=${c.commentNo}&noticeNo=${notice.noticeNo}&commentContent=${c.commentContent}">삭제</a></td>
 				</c:if>
+				<c:if test="${ loginMember.memberLevel != 1 && loginMember.memberId != c.memberId }">
+					<td><p style="color: gray;">본인글만 삭제가능</p></td>
+				</c:if>
 			</tr>
 		</tbody>
 		</c:forEach>
