@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice(annotations = Controller.class)
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.example", "com.example.gym.controller" })
+@ComponentScan(basePackages = { "com.example", "com.example.diary.controller" })
 @EnableScheduling
 @EnableAspectJAutoProxy
 public class DiaryApplication {
