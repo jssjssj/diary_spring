@@ -33,7 +33,7 @@ public class ScheduleController {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		if (scheduleDate != null) {
 			targetYear = Integer.parseInt(scheduleDate.substring(0, 4));
-			targetMonth = Integer.parseInt(scheduleDate.substring(5, 7)) - 2;
+			targetMonth = Integer.parseInt(scheduleDate.substring(5, 7));
 			targetDay = Integer.parseInt(scheduleDate.substring(8, 10));
 		}
 		Map<String, Object> paramMap = new HashMap<>();

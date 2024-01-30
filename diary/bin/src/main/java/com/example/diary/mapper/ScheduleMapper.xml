@@ -26,7 +26,7 @@
 	FROM schedule    
 	WHERE member_id = #{memberId}
 	AND YEAR(schedule_date) = #{targetYear}
-	AND MONTH(schedule_date) = #{targetMonth}
+	AND MONTH(schedule_date) = #{targetMonth} +2
 	AND DAY(schedule_date) = #{targetDay}
 	ORDER BY schedule_no DESC
 	</select>

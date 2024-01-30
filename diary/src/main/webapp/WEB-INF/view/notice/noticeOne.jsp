@@ -153,11 +153,11 @@
 	<!-- 페이징 버튼 -->
 	<div class="pagination justify-content-center">
 		<c:if test="${ currentPage > 1 }">
-			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage-1 }">이전</a>
+			<a class="page-link paging" href="/diary/notice/noticeOne?currentPage=${ currentPage-1 }">이전</a>
 		</c:if>
 			<a class="page-link paging">${ currentPage }</a>
 		<c:if test="${ currentPage < lastPage }">
-			<a class="page-link paging" href="/notice/noticeOne?currentPage=${ currentPage+1 }">다음</a>
+			<a class="page-link paging" href="/diary/notice/noticeOne?currentPage=${ currentPage+1 }">다음</a>
 		</c:if>
     </div>
 	<br>

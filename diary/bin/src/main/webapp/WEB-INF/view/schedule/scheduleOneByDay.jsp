@@ -13,7 +13,7 @@
 
 		 <div class="center">
 			<div>
-				<h2 class="center">${targetYear}년 ${targetMonth}월
+				<h2 class="center">${targetYear}년${targetMonth}월
 				${targetDay}일 일정</h2>
 			</div>
 			<div>
@@ -53,7 +53,7 @@
 		action="${contextPath}/schedule/addSchedule?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${targetDay}">
 		<div class="center">
 			<input type="hidden" name="scheduleDate"
-				value="${targetYear}-${targetMonth}-${targetDay}"><br>
+				value="${targetYear}-${targetMonth+2}-${targetDay}"><br>
 			<textarea name="scheduleMemo" class="scheduleMemo" rows="10" cols="100" style="resize: none;"></textarea>
 			<br>
 				<input type="radio" name="scheduleEmoji" id="emogi0" value="" checked="checked"/><label for="emogi0">X</label>
